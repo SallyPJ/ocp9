@@ -1,10 +1,21 @@
 # authentication/templates/authentication/login.html
 {% extends 'base.html' %}
 {% block content %}
-    <form method="post">
-        {{ form.as_p }}
-        {% csrf_token %}
-        <button type="submit" >Se connecter</button>
+    <div class="authentication_container">
+        <section class="signup_block">
+            <h2>Inscrivez-vous maintenant !</h2>
+            <form action="{% url 'signup' %}" method="get" style="display: inline;">
+            <button type="submit" class="btn btn-primary">S'inscrire</button>
     </form>
-    <p>Pas encore membre ? <a href="{% url 'signup' %}">Inscrivez-vous maintenant !</a></p>
+        </section>
+        <section class="login-block">
+            <h2>Connectez-vous</h2>
+            <form method="post" class="login-form">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="btn btn-primary">Se connecter</button>
+            </form>
+        </section>
+    </div>
+
 {% endblock content %}

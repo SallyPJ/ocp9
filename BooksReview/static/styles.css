@@ -1,0 +1,61 @@
+.page-container{
+    background-color :#f5f5dc;
+
+    color: #2c2c2c;
+    width: 100%;
+    height: 100%;
+    overflow: visible;
+    text-align: left;
+
+}
+.header{
+    border: 1px solid #ccc;
+    background-color: #1e3a5f;
+    margin-bottom: 20px;
+}
+.header__title{
+    color: #fff;
+    font-family: Helvetica, sans-serif;
+    font-size: 1.5em;
+    padding: 10px;
+    text-align: center;
+    font-weight: bold;
+}
+
+.authentication_container{
+
+    display: flex;
+    justify-content: space-between;
+    font-family: Helvetica, sans-serif;
+    padding: 20px;
+
+    gap: 20px; /* Espace entre les sections */
+
+
+}
+.signup_block, .login-block{
+    display: inline-block;
+    flex: 1;
+    text-align: center;
+
+
+}
+.btn, .btn-primary{
+    padding: 10px 20px;
+    font-size: 1em;
+    border: none;
+    background-color: #6c9a8b;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    display: inline-block;
+    text-decoration: none;
+    border-radius: 8px;
+}
+
+.form-control{
+    font-size: 1.2em; /* Agrandit le texte à l'intérieur du champ */
+    padding: 10px; /* Ajoute de l'espace autour du texte */
+    height: 50px; /* Définit une hauteur plus grande pour le champ */
+    width: 60%; Rend le champ plus large */
+    box-sizing: border-box; /* Assure que le padding n'affecte pas la largeur totale */
+}

@@ -123,6 +123,11 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 
+# Emplacement des fichiers statiques (dossier `static` dans le projet)
+STATICFILES_DIRS = [
+    BASE_DIR / "static",
+]
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
@@ -135,3 +140,5 @@ LOGIN_URL = 'login'
 LOGIN_REDIRECT_URL = 'home'
 
 LOGOUT_REDIRECT_URL = LOGIN_URL
+
+
