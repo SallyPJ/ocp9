@@ -12,7 +12,7 @@ Class-based views
     2. Add a URL to urlpatterns:  path('', Home.as_view(), name='home')
 Including another URLconf
     1. Import the include() function: from django.urls import include, path
-    2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
+    2. Add a URL to urlpatterns:  path('reviews/', include('reviews.urls'))
 """
 from django.contrib import admin
 from django.contrib.auth.views import (
@@ -22,7 +22,7 @@ from authentication.forms import CustomAuthenticationForm
 
 
 import authentication.views
-import blog.views
+import reviews.views
 
 
 urlpatterns = [
@@ -41,6 +41,6 @@ urlpatterns = [
         template_name='authentication/password_change_done.html'),
          name='password_change_done'
          ),
-    path('home/', blog.views.home, name='home'),
+    path('home/', reviews.views.home, name='home'),
     path('signup/', authentication.views.signup_page, name='signup'),
 ]
