@@ -18,9 +18,9 @@ from django.contrib import admin
 from django.contrib.auth.views import (
     LoginView, LogoutView, PasswordChangeView, PasswordChangeDoneView)
 from django.urls import path
+from django.conf import settings
+from django.conf.urls.static import static
 from authentication.forms import CustomAuthenticationForm
-
-
 import authentication.views
 import reviews.views
 
@@ -44,4 +44,10 @@ urlpatterns = [
          ),
     path('signup/', authentication.views.signup_page, name='signup'),
     path('home/', reviews.views.home, name='home'),
+    path('reviews/create-post/', reviews.views.ticket_and_photo_upload, name='create-post'),
+    path('reviews/<int:ticket_id>/', reviews.views.view_ticket, name='view-reviews')
 ]
+
+if settings.DEBUG:
+    urlpatterns += static(
+        settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

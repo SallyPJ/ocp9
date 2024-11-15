@@ -8,17 +8,16 @@
 
         <!-- Section d'affichage des tickets -->
         {% if tickets %}
-            <ul>
-                {% for ticket in tickets %}
-                    <li>
-                        <strong>{{ ticket.title }}</strong><br>
-                        {{ ticket.description }}<br>
-                        <small>
-                            Créé par {{ ticket.user.username }} le {{ ticket.time_created|date:"d M Y" }} à {{ ticket.time_created|time:"H:i" }}
-                        </small>
-                    </li>
-                {% endfor %}
-            </ul>
+            {% for ticket in tickets %}
+                <div class="post">
+                    <a href="{% url 'view-reviews' ticket.id %}">
+                        <h4>Billet : {{ ticket.title }}</h4>
+                        {% if ticket.photo %}
+                            <img src="{{ ticket.photo.image.url }}" alt="Photo du billet">
+                        {% endif %}
+                    </a>
+                </div>
+            {% endfor %}
         {% else %}
             <p>Aucun ticket n'a été créé pour l'instant.</p>
         {% endif %}
@@ -33,4 +32,11 @@
             <button type="submit" class="btn btn-primary">Créer le Ticket</button>
         </form>
     </section>
+    <section class="create-ticket-button">
+        <a href="{% url 'create-post' %}" class="btn btn-primary">Créer un Nouveau Ticket</a>
+    </section>
+
+    <p><a href="{% url 'create-post' %}">Écrire un billet</a></p>
+
+    <!-- Formulaire de telechargement de photo -->
 {% endblock content %}

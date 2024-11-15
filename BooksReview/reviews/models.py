@@ -9,6 +9,7 @@ class Photo(models.Model):
     date_created = models.DateTimeField(auto_now_add=True)
 
 class Ticket(models.Model):
+    photo = models.ForeignKey(Photo, null=True, on_delete=models.SET_NULL, blank=True)
     title = models.CharField(max_length=128)
     description = models.TextField(max_length=2048, blank=True)
     user = models.ForeignKey(

@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+{% block content %}
+    <h2>{{ ticket.title }}</h2>
+    {% if ticket.photo %}
+        <img src="{{ ticket.photo.image.url }}" alt="Photo du ticket">
+        <p>{{ ticket.photo.caption }}</p>
+    {% endif %}
+    <p>{{ ticket.description }}</p>
+{% endblock content %}
