@@ -17,7 +17,11 @@
             <footer class="footer">
                 <p class="footer__text">
                     Vous êtes connecté en tant que {{ user }}.
-                    <a class="footer__link" href="{% url 'logout' %}">Se déconnecter</a>
+                    <!--<a class="footer__link" href="{% url 'logout' %}">Se déconnecter</a>-->
+                    <form method="post" action="{% url 'logout' %}">
+                        {% csrf_token %}
+                        <button type="submit">logout</button>
+                    </form>
                 </p>
                 <p class="footer__text">
                     Voulez-vous <a class="footer__link" href="{% url 'password_change' %}">changer votre mot de passe ?</a>

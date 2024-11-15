@@ -1,13 +1,20 @@
 # authentication/templates/authentication/signup.html
 {% extends 'base.html' %}
 {% block content %}
-    <h2>Inscription</h2>
-    {% if form.errors %}
-        {{ form.errors }}
-    {% endif %}
-    <form method="post">
-        {{ form.as_p }}
-        {% csrf_token %}
-        <button type="submit" >S’inscrire</button>
-    </form>
+    <div class="signup-form-container">
+        <h2 class = "signup-form-container__title">Inscription</h2>
+        {% if form.errors %}
+            {{ form.errors }}
+        {% endif %}
+        <form class="signup-form-container__form" method="post">
+            {{ form.as_p }}
+            {% csrf_token %}
+            <div class="signup-form__actions">
+                <form>
+                    <input type="button" class="btn btn-secondary" value="Retour" onclick="history.back()">
+                </form>
+                <button type="submit" class="btn btn-primary">S’inscrire</button>
+            </div>
+        </form>
+    </div>
 {% endblock content %}

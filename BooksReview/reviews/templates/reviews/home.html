@@ -1,4 +1,36 @@
-{% extends 'base.html' %}
+
+<!-- templates/tickets/home.html -->
+{% extends "base.html" %}
+
 {% block content %}
-    <p>Vous êtes connecté !</p>
+    <section class="tickets-list">
+        <h2>Liste des Tickets</h2>
+
+        <!-- Section d'affichage des tickets -->
+        {% if tickets %}
+            <ul>
+                {% for ticket in tickets %}
+                    <li>
+                        <strong>{{ ticket.title }}</strong><br>
+                        {{ ticket.description }}<br>
+                        <small>
+                            Créé par {{ ticket.user.username }} le {{ ticket.time_created|date:"d M Y" }} à {{ ticket.time_created|time:"H:i" }}
+                        </small>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>Aucun ticket n'a été créé pour l'instant.</p>
+        {% endif %}
+    </section>
+
+    <!-- Formulaire de création de ticket -->
+    <section class="create-ticket">
+        <h2>Créer un Nouveau Ticket</h2>
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="btn btn-primary">Créer le Ticket</button>
+        </form>
+    </section>
 {% endblock content %}
