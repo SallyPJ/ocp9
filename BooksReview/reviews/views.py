@@ -60,18 +60,18 @@ def edit_ticket(request, ticket_id):
     edit_form = forms.TicketForm(instance=ticket)
     delete_form = forms.DeleteTicketForm()
     if request.method == 'POST':
-        if 'edit_blog' in request.POST:
+        if 'edit_ticket' in request.POST:
             edit_form = forms.TicketForm(request.POST, instance=ticket)
             if edit_form.is_valid():
                 edit_form.save()
                 return redirect('home')
-            if 'delete_blog' in request.POST:
-                delete_form = forms.DeleteTicketForm(request.POST)
-                if delete_form.is_valid():
-                    ticket.delete()
-                    return redirect('home')
+        if 'delete_ticket' in request.POST:
+            delete_form = forms.DeleteTicketForm(request.POST)
+            if delete_form.is_valid():
+                ticket.delete()
+                return redirect('home')
     context = {
         'edit_form': edit_form,
         'delete_form': delete_form,
 }
-    return render(request, 'blog/edit_ticket.html', context=context)
+    return render(request, 'reviews/edit_ticket.html', context=context)

@@ -45,7 +45,8 @@ urlpatterns = [
     path('signup/', authentication.views.signup_page, name='signup'),
     path('home/', reviews.views.home, name='home'),
     path('reviews/create-post/', reviews.views.ticket_and_photo_upload, name='create-post'),
-    path('reviews/<int:ticket_id>/', reviews.views.view_ticket, name='view-reviews')
+    path('reviews/<int:ticket_id>/', reviews.views.view_ticket, name='view-reviews'),
+    path('reviews/<int:ticket_id>/edit', reviews.views.edit_ticket, name='edit_ticket'),
 ]
 
 if settings.DEBUG:

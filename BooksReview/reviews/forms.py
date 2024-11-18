@@ -14,5 +14,6 @@ class PhotoForm(forms.ModelForm):
         model = Photo
         fields = ['image', 'caption']
 
+
 class DeleteTicketForm(forms.Form):
     delete_ticket = forms.BooleanField(widget=forms.HiddenInput, initial=True)
