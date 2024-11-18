@@ -7,13 +7,20 @@
     <body class="page-container">
         <header class="header">
             <h1 class="header__title">LITRevu</h1>
+            {% if user.is_authenticated %}
+             <ul class="navbar__menu">
+                <li><a href="{% url 'home' %}">Accueil</a></li>
+                <li><a href="{% url 'create-ticket' %}">Créer un ticket</a></li>
+                <li><a href="{% url 'create-review' %}">Créer une critique</a></li>
+                <li><a href="{% url 'logout' %}">Se déconnecter</a></li>
+             </ul>
         </header>
 
         <main class="content">
             {% block content %}{% endblock content %}
         </main>
 
-        {% if user.is_authenticated %}
+
             <footer class="footer">
                 <p class="footer__text">
                     Vous êtes connecté en tant que {{ user }}.

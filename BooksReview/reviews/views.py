@@ -1,5 +1,6 @@
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect, get_object_or_404
+from django.http import HttpResponseForbidden
 from .models import Ticket, Photo
 from .forms import TicketForm
 from . import forms
@@ -43,20 +44,19 @@ def ticket_and_photo_upload(request):
         'ticket_form': ticket_form,
         'photo_form': photo_form,
 }
-    return render(request, 'reviews/create-post.html', context=context)
-
-# blog/views.py
-
+    return render(request, 'reviews/create-ticket.html', context=context)
 
 @login_required
 def view_ticket(request, ticket_id):
     ticket = get_object_or_404(Ticket, id=ticket_id)
-    return render(request, 'reviews/view_reviews.html', {'ticket': ticket})
+    return render(request, 'reviews/display-tickets.html', {'ticket': ticket})
 
 
 @login_required
 def edit_ticket(request, ticket_id):
     ticket = get_object_or_404(Ticket, id=ticket_id)
+    if ticket.user != request.user:
+        return HttpResponseForbidden("Vous n'êtes pas autorisé à modifier ce billet.")
     edit_form = forms.TicketForm(instance=ticket)
     delete_form = forms.DeleteTicketForm()
     if request.method == 'POST':
@@ -73,5 +73,18 @@ def edit_ticket(request, ticket_id):
     context = {
         'edit_form': edit_form,
         'delete_form': delete_form,
-}
-    return render(request, 'reviews/edit_ticket.html', context=context)
+    }
+    return render(request, 'reviews/edit-ticket.html', context=context)
+
+
+@login_required
+def create_review(request):
+    review_form = forms.ReviewForm()
+    if request.method == 'POST':
+        review_form = forms.ReviewForm(request.POST)
+        if review_form.is_valid():
+            review = review_form.save(commit=False)
+            review.user = request.user
+            review.save()
+            return redirect('home')
+    return render(request, 'reviews/create-review.html',{'review_form': review_form})

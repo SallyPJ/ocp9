@@ -23,7 +23,20 @@ body {
     font-weight: bold;
 }
 
-h2 {
+.navbar__menu {
+    list-style-type : none;
+    display: flex;
+    justify-content: space-between;
+    align-items: right;
+    padding: 10px 20px;
+    border: 1px solid #000; /* Bordure noire */
+    border-top: none;
+    border-bottom: 1px solid #000; /* Bordure inférieure uniquement */
+    background-color: #fff; /* Fond blanc */
+    font-family: Arial, sans-serif; /* Police classique */
+}
+
+.signup-block__title, .login-block__title {
     font-family: Helvetica, sans-serif;
     font-size: 1.5em;
     padding: 10px;
@@ -100,7 +113,52 @@ h2 {
 
 }
 
-.signup-form__actions{
+.signup-form__buttons{
     justify-self: flex-end;
     justify-content: space-between;
+}
+
+.tickets-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px; /* Espacement entre les tickets */
+    margin: 20px 0;
+}
+
+.tickets-list__ticket {
+    border: 1px solid #ddd; /* Bordure discrète */
+    border-radius: 8px; /* Coins arrondis */
+    padding: 15px; /* Espacement interne */
+    background-color: #fff; /* Fond blanc */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Ombre pour l'esthétique */
+
+.ticket__user {
+    font-weight: bold;
+    font-size: 1rem;
+}
+
+.ticket__time {
+    font-size: 0.9rem;
+    color: #555;
+}
+
+/* Contenu */
+.ticket__title {
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.ticket__description {
+    margin-bottom: 15px;
+    line-height: 1.5;
+    color: #333;
+}
+
+/* Image */
+.ticket__image img {
+    max-width: 100%;
+    height: auto;
+    border: 1px solid #ddd;
+    border-radius: 5px;
 }

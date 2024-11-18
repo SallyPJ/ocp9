@@ -5,6 +5,7 @@
         {{ ticket_form.as_p }}
         {{ photo_form.as_p }}
         {% csrf_token %}
-        <button type="submit" >Publier</button>
+        <button type="submit">Publier</button>
     </form>
+ <button class="btn btn-secondary" onclick="history.back()">⬅ Retour</button>
 {% endblock content %}

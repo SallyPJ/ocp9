@@ -1,0 +1,24 @@
+
+{% block content %}
+    <!-- Section d'affichage des tickets -->
+    <section class="tickets-list">
+        {% if tickets %}
+            {% for ticket in tickets %}
+                <article class="tickets-list__ticket">
+                    <p class="ticket__user">{{ ticket.user }} a demandé une critique</p>
+                    <time class = "ticket__time">{{ ticket.time_created }}</time>
+                    <h2 class="ticket__title">{{ ticket.title }}</h2>
+                    <p class="ticket__description">{{ ticket.description }}</p>
+                    <!-- <a href="{% url 'view-reviews' ticket.id %}">-->
+                        {% if ticket.photo %}
+                            <img class="ticket__image" src="{{ ticket.photo.image.url }}" alt="Photo du billet">
+                        {% endif %}
+                    </a>
+                </article>
+            {% endfor %}
+        {% else %}
+            <p>Aucun ticket n'a été créé pour l'instant.</p>
+        {% endif %}
+    </section>
+
+{% endblock content %}

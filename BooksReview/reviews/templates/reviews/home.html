@@ -3,40 +3,12 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <section class="tickets-list">
-        <h2>Liste des Tickets</h2>
-
-        <!-- Section d'affichage des tickets -->
-        {% if tickets %}
-            {% for ticket in tickets %}
-                <div class="post">
-                    <a href="{% url 'view-reviews' ticket.id %}">
-                        <h4>Billet : {{ ticket.title }}</h4>
-                        {% if ticket.photo %}
-                            <img src="{{ ticket.photo.image.url }}" alt="Photo du billet">
-                        {% endif %}
-                    </a>
-                </div>
-            {% endfor %}
-        {% else %}
-            <p>Aucun ticket n'a été créé pour l'instant.</p>
-        {% endif %}
+    <section class="tickets-creation">
+        <button type="button" class="btn btn-primary" onclick="window.location.href='{% url 'create-ticket' %}'">Demander une critique</button>
+        <button type="button" class="btn btn-primary" onclick="window.location.href='{% url 'create-review' %}'">Créer une critique</button>
     </section>
+    <!-- Affichage des tickets -->
+    {% include "reviews/display-feed.html" %}
 
-    <!-- Formulaire de création de ticket -->
-    <section class="create-ticket">
-        <h2>Créer un Nouveau Ticket</h2>
-        <form method="post">
-            {% csrf_token %}
-            {{ form.as_p }}
-            <button type="submit" class="btn btn-primary">Créer le Ticket</button>
-        </form>
-    </section>
-    <section class="create-ticket-button">
-        <a href="{% url 'create-post' %}" class="btn btn-primary">Créer un Nouveau Ticket</a>
-    </section>
 
-    <p><a href="{% url 'create-post' %}">Écrire un billet</a></p>
-
-    <!-- Formulaire de telechargement de photo -->
 {% endblock content %}

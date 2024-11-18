@@ -3,13 +3,13 @@
 {% block content %}
     <div class="authentication_container">
         <section class="signup_block">
-            <h2>Inscrivez-vous maintenant !</h2>
+            <h2 class="signup-block__title">Inscrivez-vous maintenant !</h2>
             <form action="{% url 'signup' %}" method="get" style="display: inline;">
             <button type="submit" class="btn btn-primary">S'inscrire</button>
     </form>
         </section>
         <section class="login-block">
-            <h2>Connectez-vous</h2>
+            <h2 class="login-block__title">Connectez-vous</h2>
             <form method="post" class="login-form">
             {% csrf_token %}
             {{ form.as_p }}

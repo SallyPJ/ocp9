@@ -1,5 +1,5 @@
 from django import forms
-from .models import Ticket, Photo
+from .models import Ticket, Photo, Review
 
 
 class TicketForm(forms.ModelForm):
@@ -17,3 +17,9 @@ class PhotoForm(forms.ModelForm):
 
 class DeleteTicketForm(forms.Form):
     delete_ticket = forms.BooleanField(widget=forms.HiddenInput, initial=True)
+
+
+class ReviewForm(forms.ModelForm):
+    class Meta:
+        model = Review
+        fields = ['rating', 'headline', 'body']

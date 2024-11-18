@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+{% block content %}
+    <h2>Écrire une critique</h2> <form method="post" enctype="multipart/form-data">
+        {{ review_form.as_p }}
+        {% csrf_token %}
+        <button type="submit">Publier</button>
+    </form>
+ <button class="btn btn-secondary" onclick="history.back()">⬅ Retour</button>
+{% endblock content %}
