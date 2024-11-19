@@ -8,33 +8,38 @@
         <header class="header">
             <h1 class="header__title">LITRevu</h1>
             {% if user.is_authenticated %}
-            <nav class="navbar">
-                <ul class="navbar__links">
-                    <li class="navbar__item"><a href="{% url 'home' %}">Flux</a></li>
-                    <li class="navbar__item"><a href="{% url 'create-ticket' %}">Posts</a></li>
-                    <li class="navbar__item"><a href="{% url 'create-review' %}">Abonnements</a></li>
-                    <li class="navbar__item"><a href="{% url 'logout' %}">Se déconnecter</a></li>
-             </ul>
+                <nav class="navbar">
+                    <ul class="navbar__links">
+                        <li class="navbar__item"><a href="{% url 'home' %}">Flux</a></li>
+                        <li class="navbar__item"><a href="{% url 'create-ticket' %}">Posts</a></li>
+                        <li class="navbar__item"><a href="{% url 'create-review' %}">Abonnements</a></li>
+                        <li class="navbar__item">
+                            <form method="post" action="{% url 'logout' %}" style="display: inline;">
+                                {% csrf_token %}
+                                <button type="submit" class="navbar__link navbar__button-link">Se déconnecter</button>
+                            </form>
+                        </li>
+                    </ul>
+                </nav>
+            {% endif %}
         </header>
 
         <main class="content">
-            {% block content %}{% endblock content %}
+                {% block content %}{% endblock content %}
         </main>
 
+        <footer class="footer">
+            <p class="footer__text">
+                {% if user.is_authenticated %}
+                Vous êtes connecté en tant que {{ user }}.
+                <!--<a class="footer__link" href="{% url 'logout' %}">Se déconnecter <form method="post" action="{% url 'logout' %}">
+                    {% csrf_token %}
+                    <button type="submit">logout</button>
+                </form></a>-->
+                Voulez-vous <a class="footer__link" href="{% url 'password_change' %}">changer votre mot de passe ?</a>
+                {% endif %}
+            </p>
+        </footer>
 
-            <footer class="footer">
-                <p class="footer__text">
-                    Vous êtes connecté en tant que {{ user }}.
-                    <!--<a class="footer__link" href="{% url 'logout' %}">Se déconnecter</a>-->
-                    <form method="post" action="{% url 'logout' %}">
-                        {% csrf_token %}
-                        <button type="submit">logout</button>
-                    </form>
-                </p>
-                <p class="footer__text">
-                    Voulez-vous <a class="footer__link" href="{% url 'password_change' %}">changer votre mot de passe ?</a>
-                </p>
-            </footer>
-        {% endif %}
     </body>
 </html>

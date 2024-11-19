@@ -12,6 +12,9 @@ body {
     border: 1px solid #ccc;
     background-color: #1e3a5f;
     margin-bottom: 20px;
+    display: flex;
+    justify-content: space-between; /* Aligne les éléments sur les bords */
+    align-items: center; /* Centre verticalement le titre et le menu */
 }
 
 .header__title {
@@ -26,15 +29,7 @@ body {
 .navbar__links {
     list-style-type : none;
     display: flex;
-    justify-content: space-between;
-    align-items: right;
-    padding: 10px 20px;
-    border: 1px solid #000; /* Bordure noire */
-    border-top: none;
-    border-bottom: 1px solid #000; /* Bordure inférieure uniquement */
-    background-color: #fff; /* Fond blanc */
-    font-family: Arial, sans-serif; /* Police classique */
-}
+
 
 .signup-block__title, .login-block__title {
     font-family: Helvetica, sans-serif;
