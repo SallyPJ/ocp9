@@ -23,7 +23,7 @@ body {
     font-weight: bold;
 }
 
-.navbar__menu {
+.navbar__links {
     list-style-type : none;
     display: flex;
     justify-content: space-between;
