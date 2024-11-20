@@ -47,8 +47,9 @@ urlpatterns = [
     path('reviews/create-ticket/', reviews.views.ticket_and_photo_upload, name='create-ticket'),
     path('reviews/<int:ticket_id>/', reviews.views.view_ticket, name='view-reviews'),
     path('reviews/<int:ticket_id>/edit', reviews.views.edit_ticket, name='edit_ticket'),
-    path('reviews/create-review/', reviews.views.create_review, name='create-review'),
-    path('create-ticket-and-review/', reviews.views.create_ticket_and_review, name='create-ticket-and-review')
+    path('create-review/<int:ticket_id>/', reviews.views.create_review, name='create-review'),
+    path('create-ticket-and-review/', reviews.views.create_ticket_and_review, name='create-ticket-and-review'),
+    path('reviews/posts.html/', reviews.views.display_user_posts, name='posts'),
 ]
 
 if settings.DEBUG:

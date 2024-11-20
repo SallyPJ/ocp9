@@ -12,8 +12,8 @@
                 <nav class="navbar">
                     <ul class="navbar__links">
                         <li class="navbar__item"><a href="{% url 'home' %}">Flux</a></li>
-                        <li class="navbar__item"><a href="{% url 'create-ticket' %}">Posts</a></li>
-                        <li class="navbar__item"><a href="{% url 'create-review' %}">Abonnements</a></li>
+                        <li class="navbar__item"><a href="{% url 'posts' %}">Posts</a></li>
+                         <li class="navbar__item"><a href="{% url 'posts' %}">Abonnements</a></li>
                         <li class="navbar__item">
                             <form method="post" action="{% url 'logout' %}" >
                                 {% csrf_token %}

@@ -1,24 +1,16 @@
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponseForbidden
-from .models import Ticket, Photo
+from .models import Ticket, Photo, Review
 from .forms import TicketForm
 from . import forms
 
 
 @login_required
 def home(request):
-    tickets = Ticket.objects.all()  # Récupère tous les tickets
+    tickets = Ticket.objects.prefetch_related('review_set') # Récupère tous les tickets
     photos = Photo.objects.all()
     #form = TicketForm()  # Formulaire pour créer un nouveau ticket
-
-    if request.method == 'POST':
-        form = TicketForm(request.POST)
-        if form.is_valid():
-            ticket = form.save(commit=False)  # Crée une instance sans la sauvegarder encore
-            ticket.user = request.user  # Assigne l'utilisateur connecté
-            ticket.save()
-            return redirect('home')  # Redirige vers la page d'accueil après la création du ticket
 
     return render(request, 'reviews/home.html', {'tickets': tickets,'photos': photos})
 #'form': form}
@@ -64,12 +56,12 @@ def edit_ticket(request, ticket_id):
             edit_form = forms.TicketForm(request.POST, instance=ticket)
             if edit_form.is_valid():
                 edit_form.save()
-                return redirect('home')
+                return redirect('posts')
         if 'delete_ticket' in request.POST:
             delete_form = forms.DeleteTicketForm(request.POST)
             if delete_form.is_valid():
                 ticket.delete()
-                return redirect('home')
+                return redirect('posts')
     context = {
         'edit_form': edit_form,
         'delete_form': delete_form,
@@ -78,16 +70,23 @@ def edit_ticket(request, ticket_id):
 
 
 @login_required
-def create_review(request):
+def create_review(request,ticket_id):
+    ticket = get_object_or_404(Ticket, id=ticket_id)
     review_form = forms.ReviewForm()
     if request.method == 'POST':
         review_form = forms.ReviewForm(request.POST)
         if review_form.is_valid():
             review = review_form.save(commit=False)
             review.user = request.user
+            review.ticket = ticket
             review.save()
             return redirect('home')
-    return render(request, 'reviews/create-review.html',{'review_form': review_form})
+
+    context = {
+        'review_form': review_form,
+        'ticket': ticket,
+    }
+    return render(request, 'reviews/create-review.html', context=context)
 
 @login_required
 def create_ticket_and_review(request):
@@ -124,11 +123,9 @@ def create_ticket_and_review(request):
     }
     return render(request, 'reviews/create-ticket-and-review.html', context=context)
 
-@login_required
-def display_review_with_ticket(request, review_id):
-    review = get_object_or_404(Review, id=review_id)
-    ticket = review.ticket  # Relation entre Review et Ticket
-    return render(request, 'reviews/display_review_with_ticket.html', {
-        'review': review,
-        'ticket': ticket
-    })
+
+
+@login_required()
+def display_user_posts(request):
+    user_tickets = Ticket.objects.filter(user=request.user).prefetch_related('review_set')
+    return render(request, 'reviews/posts.html', {'tickets': user_tickets, 'show_buttons': True})

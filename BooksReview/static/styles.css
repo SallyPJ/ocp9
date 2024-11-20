@@ -11,10 +11,11 @@ body {
 .header {
     border: 1px solid #ccc;
     background-color: #1e3a5f;
-    margin-bottom: 20px;
+    margin: 20px;
     display: flex;
     justify-content: space-between; /* Aligne les éléments sur les bords */
     align-items: center;
+
 }
 
 .header__title {
@@ -30,10 +31,14 @@ body {
     list-style-type : none;
     display: flex;
     justify-content: space-between;
+    gap: 20px;
+    margin: 20px;
+
 }
 
 .navbar__item {
     display: inline;
+    color: white;
 
 }
 
