@@ -5,7 +5,7 @@
 {% block content %}
     <section class="tickets-creation">
         <button type="button" class="btn btn-primary" onclick="window.location.href='{% url 'create-ticket' %}'">Demander une critique</button>
-        <button type="button" class="btn btn-primary" onclick="window.location.href='{% url 'create-review' %}'">Créer une critique</button>
+        <button type="button" class="btn btn-primary" onclick="window.location.href='{% url 'create-ticket-and-review' %}'">Créer une critique</button>
     </section>
     <!-- Affichage des tickets -->
     {% include "reviews/display-feed.html" %}

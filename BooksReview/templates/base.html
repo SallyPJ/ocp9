@@ -1,6 +1,7 @@
 {% load static %}
 <html>
     <head>
+        <meta charset="UTF-8">
         <title>LITRevu</title>
         <link rel="stylesheet" href="{% static 'styles.css' %}" />
     </head>
@@ -14,9 +15,9 @@
                         <li class="navbar__item"><a href="{% url 'create-ticket' %}">Posts</a></li>
                         <li class="navbar__item"><a href="{% url 'create-review' %}">Abonnements</a></li>
                         <li class="navbar__item">
-                            <form method="post" action="{% url 'logout' %}" style="display: inline;">
+                            <form method="post" action="{% url 'logout' %}" >
                                 {% csrf_token %}
-                                <button type="submit" class="navbar__link navbar__button-link">Se déconnecter</button>
+                                <button type="submit" class="navbar__link">Se déconnecter</button>
                             </form>
                         </li>
                     </ul>
@@ -25,7 +26,7 @@
         </header>
 
         <main class="content">
-                {% block content %}{% endblock content %}
+            {% block content %}{% endblock content %}
         </main>
 
         <footer class="footer">
@@ -40,6 +41,5 @@
                 {% endif %}
             </p>
         </footer>
-
     </body>
 </html>

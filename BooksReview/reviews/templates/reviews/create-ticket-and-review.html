@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+    <h2>Créer un billet et une critique</h2>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <!-- Formulaire pour le billet -->
+        <h3>Billet</h3>
+        {{ ticket_form.as_p }}
+        {{ photo_form.as_p }}
+
+        <!-- Formulaire pour la critique -->
+        <h3>Critique</h3>
+        {{ review_form.as_p }}
+
+        <button type="submit" class="btn btn-primary mt-3">Publier</button>
+    </form>
+    <button class="btn btn-secondary mt-3" onclick="history.back()">⬅ Retour</button>
+</div>
+{% endblock content %}

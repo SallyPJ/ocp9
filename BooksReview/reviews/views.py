@@ -88,3 +88,47 @@ def create_review(request):
             review.save()
             return redirect('home')
     return render(request, 'reviews/create-review.html',{'review_form': review_form})
+
+@login_required
+def create_ticket_and_review(request):
+    ticket_form = forms.TicketForm()
+    photo_form = forms.PhotoForm()
+    review_form = forms.ReviewForm()
+
+    if request.method == 'POST':
+        ticket_form = forms.TicketForm(request.POST)
+        photo_form = forms.PhotoForm(request.POST, request.FILES)
+        review_form = forms.ReviewForm(request.POST)
+        if all([ticket_form.is_valid(), photo_form.is_valid(), review_form.is_valid()]):
+            # Sauvegarde du ticket
+            photo = photo_form.save(commit=False)
+            photo.uploader = request.user
+            photo.save()
+            ticket = ticket_form.save(commit=False)
+            ticket.user = request.user
+            ticket.photo = photo
+            ticket.save()
+
+            # Sauvegarde de la critique liée au ticket
+            review = review_form.save(commit=False)
+            review.user = request.user
+            review.ticket = ticket
+            review.save()
+
+            return redirect('home')  # Redirige vers la page principale après succès
+
+    context = {
+        'ticket_form': ticket_form,
+        'photo_form': photo_form,
+        'review_form': review_form,
+    }
+    return render(request, 'reviews/create-ticket-and-review.html', context=context)
+
+@login_required
+def display_review_with_ticket(request, review_id):
+    review = get_object_or_404(Review, id=review_id)
+    ticket = review.ticket  # Relation entre Review et Ticket
+    return render(request, 'reviews/display_review_with_ticket.html', {
+        'review': review,
+        'ticket': ticket
+    })
