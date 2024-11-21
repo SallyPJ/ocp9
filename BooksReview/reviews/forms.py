@@ -1,5 +1,6 @@
 from django import forms
 from .models import Ticket, Photo, Review
+from django.contrib.auth import get_user_model
 
 
 class TicketForm(forms.ModelForm):
@@ -23,3 +24,21 @@ class ReviewForm(forms.ModelForm):
     class Meta:
         model = Review
         fields = ['rating', 'headline', 'body']
+
+
+User = get_user_model()
+
+
+class FollowUsersForm(forms.Form):
+    followed_user = forms.ModelChoiceField(
+        queryset=User.objects.none(),
+        label="Utilisateur à suivre",
+        widget=forms.Select
+    )
+
+    def __init__(self, *args, **kwargs):
+        user = kwargs.pop('user', None)  # Récupérer l'utilisateur connecté
+        super().__init__(*args, **kwargs)
+        if user:
+            # Exclure l'utilisateur connecté pour éviter de se suivre soi-même
+            self.fields['followed_user'].queryset = User.objects.exclude(id=user.id)

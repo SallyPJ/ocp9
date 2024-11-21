@@ -10,10 +10,10 @@
             <h1 class="header__title">LITRevu</h1>
             {% if user.is_authenticated %}
                 <nav class="navbar">
-                    <ul class="navbar__links">
-                        <li class="navbar__item"><a href="{% url 'home' %}">Flux</a></li>
-                        <li class="navbar__item"><a href="{% url 'posts' %}">Posts</a></li>
-                         <li class="navbar__item"><a href="{% url 'posts' %}">Abonnements</a></li>
+                    <ul class="navbar__menu">
+                        <li class="navbar__item"><a href="{% url 'home' %}" class="navbar__link">Flux</a></li>
+                        <li class="navbar__item"><a href="{% url 'posts' %}" class="navbar__link">Posts</a></li>
+                         <li class="navbar__item"><a href="{% url 'follow-users-form' %}" class="navbar__link">Abonnements</a></li>
                         <li class="navbar__item">
                             <form method="post" action="{% url 'logout' %}" >
                                 {% csrf_token %}

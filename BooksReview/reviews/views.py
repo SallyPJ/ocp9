@@ -1,8 +1,8 @@
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponseForbidden
-from .models import Ticket, Photo, Review
-from .forms import TicketForm
+from .models import Ticket, Photo, Review, UserFollows
+from .forms import FollowUsersForm
 from . import forms
 
 
@@ -129,3 +129,32 @@ def create_ticket_and_review(request):
 def display_user_posts(request):
     user_tickets = Ticket.objects.filter(user=request.user).prefetch_related('review_set')
     return render(request, 'reviews/posts.html', {'tickets': user_tickets, 'show_buttons': True})
+
+@login_required
+def follow_users_form(request):
+    # Gestion du formulaire pour suivre un utilisateur
+    if request.method == 'POST':
+        if 'follow_user' in request.POST:  # Suivre un utilisateur
+            form = FollowUsersForm(request.POST, user=request.user)
+            if form.is_valid():
+                followed_user = form.cleaned_data['followed_user']
+                UserFollows.objects.get_or_create(user=request.user, followed_user=followed_user)
+        elif 'unfollow_user' in request.POST:  # Se désabonner d'un utilisateur
+            follow_id = request.POST.get('unfollow_user')
+            UserFollows.objects.filter(id=follow_id, user=request.user).delete()
+
+        # Redirige vers la même page après une action POST
+        return redirect('follow-users-form')
+
+    # Affichage du formulaire et des listes
+    form = FollowUsersForm(user=request.user)
+    followed_users = UserFollows.objects.filter(user=request.user)  # Utilisateurs suivis
+    followers = UserFollows.objects.filter(followed_user=request.user)  # Abonnés
+
+    context = {
+        'form': form,
+        'followed_users': followed_users,
+        'followers': followers,
+    }
+    return render(request, 'reviews/follow-users-form.html', context)
+

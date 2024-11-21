@@ -27,7 +27,7 @@ body {
     font-weight: bold;
 }
 
-.navbar__links {
+.navbar__menu {
     list-style-type : none;
     display: flex;
     justify-content: space-between;
@@ -40,6 +40,15 @@ body {
     display: inline;
     color: white;
 
+}
+navbar__link {
+    text-decoration: none;
+    color: white;
+
+}
+.navbar__link:visited {
+    text-decoration: none
+    color: white;
 }
 
 
@@ -129,13 +138,13 @@ body {
     display: flex;
     flex-direction: column;
     gap: 20px; /* Espacement entre les tickets */
-    margin: 20px 0;
+    margin: 50px ;
 }
 
 .tickets-list__ticket {
-    border: 1px solid #ddd; /* Bordure discrète */
+    border: 1px solid #ddd;
     border-radius: 8px; /* Coins arrondis */
-    padding: 15px; /* Espacement interne */
+    padding: 10px; /* Espacement interne */
     background-color: #fff; /* Fond blanc */
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Ombre pour l'esthétique */
 
@@ -168,4 +177,13 @@ body {
     height: auto;
     border: 1px solid #ddd;
     border-radius: 5px;
+}
+
+.review {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 10px;
+    margin-bottom: 10px;
+    background-color: #f9f9f9;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
