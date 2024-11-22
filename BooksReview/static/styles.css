@@ -33,7 +33,6 @@ body {
 }
 
 .navbar__menu {
-
     display: flex;
     gap: 20px;
     margin: 20px;
@@ -173,52 +172,67 @@ button.navbar__link:hover {
 
 }
 
-.tickets-list {
+.feed-container {
     display: flex;
     flex-direction: column;
     gap: 20px; /* Espacement entre les tickets */
     margin: 50px ;
 }
 
-.tickets-list__ticket {
+.feed-container__item {
     border: 2px solid #ddd;
     border-radius: 8px; /* Coins arrondis */
     padding: 10px; /* Espacement interne */
     background-color: #fff; /* Fond blanc */
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Ombre pour l'esthétique */
 
-.ticket__user {
+.ticket-item {
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+
+}
+
+.ticket-item__header {
+    display: flex; /* Active le mode Flexbox pour aligner les éléments horizontalement */
+    justify-content: space-between; /* Place les éléments aux extrémités (gauche et droite) */
+    align-items: center; /* Centre verticalement l'auteur et le temps */
+    margin-bottom: 10px;
+}
+
+.ticket-item__author {
     font-weight: bold;
     font-size: 1rem;
 }
 
-.ticket__time {
+.ticket-item__time {
     font-size: 0.9rem;
     color: #555;
+    align-self: flex-end;
 }
 
 /* Contenu */
-.ticket__title {
+.ticket-item__headline {
     font-size: 1.2rem;
     font-weight: bold;
     margin-bottom: 10px;
 }
 
-.ticket__description {
+.ticket-item__description {
     margin-bottom: 15px;
     line-height: 1.5;
     color: #333;
 }
 
 /* Image */
-.ticket__image img {
-    max-width: 100%;
-    height: auto;
-    border: 1px solid #ddd;
-    border-radius: 5px;
+.ticket-item__image img {
+    max-width: 100%; /* Limite la largeur de l'image à celle de la carte */
+    height: auto; /* Préserve le ratio de l'image */
+    border-radius: 4px; /* Ajout d'un léger arrondi aux coins */
+    object-fit: cover; /* Gère le recadrage des images si nécessaire */
 }
 
-.review {
+.review-item {
     border: 1px solid #ddd;
     border-radius: 8px;
     padding: 10px;
