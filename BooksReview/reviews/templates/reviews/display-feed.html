@@ -16,7 +16,7 @@
                     {% if show_buttons and ticket.user == request.user %}
                     <a href="{% url 'edit_ticket' ticket.id %}" class="btn btn-primary">Modifier</a>
                     <!-- A corriger -->
-                    <form method="post">
+                    <form method="post" action="{% url 'edit_ticket' ticket.id %}">
                         {{ delete_form }}
                         {% csrf_token %}
                         <button type="submit" name = "delete_ticket" class="btn btn-secondary">Supprimer</button>

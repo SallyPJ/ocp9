@@ -15,7 +15,7 @@
                         <li class="navbar__item"><a href="{% url 'posts' %}" class="navbar__link">Posts</a></li>
                          <li class="navbar__item"><a href="{% url 'follow-users-form' %}" class="navbar__link">Abonnements</a></li>
                         <li class="navbar__item">
-                            <form method="post" action="{% url 'logout' %}" >
+                            <form method="post" action="{% url 'logout' %}">
                                 {% csrf_token %}
                                 <button type="submit" class="navbar__link">Se déconnecter</button>
                             </form>
@@ -25,7 +25,7 @@
             {% endif %}
         </header>
 
-        <main class="content">
+        <main class="main-content">
             {% block content %}{% endblock content %}
         </main>
 

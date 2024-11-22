@@ -2,11 +2,14 @@
 <!-- templates/tickets/home.html -->
 {% extends "base.html" %}
 
+
 {% block content %}
-    <section class="tickets-creation">
-        <button type="button" class="btn btn-primary" onclick="window.location.href='{% url 'create-ticket' %}'">Demander une critique</button>
-        <button type="button" class="btn btn-primary" onclick="window.location.href='{% url 'create-ticket-and-review' %}'">Créer une critique</button>
-    </section>
-    <!-- Affichage des tickets -->
-    {% include "reviews/display-feed.html" %}
+    <main class="home-main-content">
+        <section class="tickets__creation">
+            <button type="button" class="btn btn-primary" onclick="window.location.href='{% url 'create-ticket' %}'">Demander une critique</button>
+            <button type="button" class="btn btn-primary" onclick="window.location.href='{% url 'create-ticket-and-review' %}'">Créer une critique</button>
+        </section>
+        <!-- Affichage des tickets -->
+        {% include "reviews/display-feed.html" %}
+    </main>
 {% endblock content %}
