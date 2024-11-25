@@ -50,7 +50,8 @@ urlpatterns = [
     path('create-review/<int:ticket_id>/', reviews.views.create_review, name='create-review'),
     path('create-ticket-and-review/', reviews.views.create_ticket_and_review, name='create-ticket-and-review'),
     path('reviews/posts.html/', reviews.views.display_user_posts, name='posts'),
-    path('follow-users-form/', reviews.views.follow_users_form, name='follow-users-form')
+    path('follow-users-form/', reviews.views.follow_users_form, name='follow-users-form'),
+
 ]
 
 if settings.DEBUG:

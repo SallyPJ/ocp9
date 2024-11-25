@@ -5,7 +5,6 @@
     <p>Publié par {{ ticket.user }} le {{ ticket.time_created }}</p>
     {% if ticket.photo %}
         <img src="{{ ticket.photo.image.url }}" alt="Photo du ticket">
-        <p>{{ ticket.photo.caption }}</p>
     {% endif %}
     <p>{{ ticket.description }}</p>
 {% endblock content %}

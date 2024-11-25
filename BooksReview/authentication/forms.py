@@ -7,7 +7,7 @@ from django.contrib.auth.forms import AuthenticationForm
 class SignupForm(UserCreationForm):
     username = forms.CharField(
         label='',
-        widget=forms.TextInput(attrs={'placeholder': 'Nom d’utilisateur', 'class': 'form-control'})
+        widget=forms.TextInput(attrs={'placeholder': 'Nom d’utilisateur', 'class': 'form-control '})
     )
     password1 = forms.CharField(
         label='',

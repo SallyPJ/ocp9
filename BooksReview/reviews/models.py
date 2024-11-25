@@ -7,7 +7,6 @@ from PIL import Image
 
 class Photo(models.Model):
     image = models.ImageField()
-    caption = models.CharField(max_length=128, blank=True)
     uploader = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     date_created = models.DateTimeField(auto_now_add=True)
 
@@ -33,6 +32,9 @@ class Ticket(models.Model):
     image = models.ImageField(null=True, blank=True)
     time_created = models.DateTimeField(auto_now_add=True)
 
+    class Meta:
+        ordering = ('-time_created',)
+
 
 class Review(models.Model):
     ticket = models.ForeignKey(to=Ticket, on_delete=models.CASCADE)
@@ -44,6 +46,8 @@ class Review(models.Model):
     user = models.ForeignKey(
         to=settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     time_created = models.DateTimeField(auto_now_add=True)
+    class Meta:
+        ordering = ['-time_created']
 
 
 class UserFollows(models.Model):

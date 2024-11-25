@@ -37,17 +37,19 @@
                     {% endif %}
 
                     {% if show_buttons and ticket.user == request.user %}
+                    <div class="ticket-item__buttons--edit">
                         <a href="{% url 'edit_ticket' ticket.id %}" class="btn btn-primary">Modifier</a>
                         <form method="post" action="{% url 'edit_ticket' ticket.id %}">
                             {{ delete_form }}
                             {% csrf_token %}
                             <button type="submit" name="delete_ticket" class="btn btn-secondary">Supprimer</button>
                         </form>
+                    </div>
                     {% endif %}
 
                     <!-- Bouton pour créer une critique si aucune n'est associée -->
-                    {% if not ticket.review_set.all %}
-                        <button type="button" class="btn btn-primary" onclick="window.location.href='{% url 'create-review' ticket.id %}'">Créer une critique</button>
+                    {% if not show_buttons and not ticket.review_set.all %}
+                        <button type="button" class="btn btn-primary btn-create-review" onclick="window.location.href='{% url 'create-review' ticket.id %}'">Créer une critique</button>
                     {% endif %}
                 </article>
             {% endfor %}

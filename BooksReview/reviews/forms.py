@@ -13,7 +13,8 @@ class TicketForm(forms.ModelForm):
 class PhotoForm(forms.ModelForm):
     class Meta:
         model = Photo
-        fields = ['image', 'caption']
+        fields = ['image']
+
 
 
 class DeleteTicketForm(forms.Form):
@@ -24,6 +25,16 @@ class ReviewForm(forms.ModelForm):
     class Meta:
         model = Review
         fields = ['rating', 'headline', 'body']
+        widgets = {
+            'rating': forms.RadioSelect(choices=[
+                ('0', '0'),
+                ('1', '1'),
+                ('2', '2'),
+                ('3', '3'),
+                ('4', '4'),
+                ('5', '5'),
+            ]),
+        }
 
 
 User = get_user_model()
