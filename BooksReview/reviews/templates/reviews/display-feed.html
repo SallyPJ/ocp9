@@ -1,63 +1,73 @@
 {% block content %}
-    <!-- Section d'affichage des tickets -->
     <section class="feed-container">
-        {% if tickets %}
-            {% for ticket in tickets %}
-                <article class="feed-container__item">
 
-                    <!-- Affichage de la critique associée -->
-                    {% if ticket.review_set.all %}
-                        <section class="review-list">
-                            {% for review in ticket.review_set.all %}
-                                <div class="review-item">
-                                    <header class="review-item__header">
-                                        <p class="review-item__author">Critique de {{ review.user }}</p>
-                                        <time class="review-item__time" datetime="{{ review.time_created|date:'c' }}">{{ review.time_created|date:'H:i, d F Y' }}</time>
-                                    </header>
-                                    <h3 class="review-item__headline">{{ review.headline }}</h3>
-                                    <p class="review-item__rating">
-                                        <span class="rating__label">Note :</span>
-                                        <span class="rating__stars">{{ review.star_rating }}</span>
-                                    </p>
-                                    <p class="review-item_body">{{ review.body }}</p>
-                                </div>
-                            {% endfor %}
-                        </section>
-                    {% endif %}
-
-                    <!-- Ticket -->
-                    <section class="ticket-item">
-                        <header class="ticket-item__header">
-                            <p class="ticket-item__author">{{ ticket.user }} a demandé une critique</p>
-                            <time class="ticket-item__time">{{ ticket.time_created }}</time>
-                        </header>
+        <!-- Section des tickets originaux -->
+        {% for ticket in tickets %}
+            <article class="feed-container__item">
+                <section class="ticket-item">
+                    <header class="ticket-item__header">
+                        <p class="ticket-item__author">{{ ticket.user }} a demandé une critique</p>
+                        <time class="ticket-item__time">{{ ticket.time_created }}</time>
+                    </header>
                     <h2 class="ticket-item__headline">{{ ticket.title }}</h2>
                     <p class="ticket-item__description">{{ ticket.description }}</p>
-                    </section>
 
                     {% if ticket.photo %}
                         <img class="ticket-item__image" src="{{ ticket.photo.image.url }}" alt="Photo du billet">
                     {% endif %}
 
                     {% if show_buttons and ticket.user == request.user %}
-                    <div class="ticket-item__buttons--edit">
-                        <a href="{% url 'edit_ticket' ticket.id %}" class="btn btn-primary">Modifier</a>
-                        <form method="post" action="{% url 'edit_ticket' ticket.id %}">
-                            {{ delete_form }}
-                            {% csrf_token %}
-                            <button type="submit" name="delete_ticket" class="btn btn-secondary">Supprimer</button>
-                        </form>
-                    </div>
+                        <div class="ticket-item__buttons--edit">
+                            <a href="{% url 'edit_ticket' ticket.id %}" class="btn btn-primary">Modifier</a>
+                            <form method="post" action="{% url 'edit_ticket' ticket.id %}">
+                                {{ delete_form }}
+                                {% csrf_token %}
+                                <button type="submit" name="delete_ticket" class="btn btn-secondary">Supprimer</button>
+                            </form>
+                        </div>
                     {% endif %}
 
-                    <!-- Bouton pour créer une critique si aucune n'est associée -->
                     {% if not show_buttons and not ticket.review_set.all %}
                         <button type="button" class="btn btn-primary btn-create-review" onclick="window.location.href='{% url 'create-review' ticket.id %}'">Créer une critique</button>
                     {% endif %}
-                </article>
-            {% endfor %}
-        {% else %}
-            <p>Aucun ticket n'a été créé pour l'instant.</p>
-        {% endif %}
+                </section>
+            </article>
+        {% endfor %}
+
+        <!-- Section des critiques -->
+        {% for review in reviews %}
+            <article class="feed-container__item">
+                <section class="review-item">
+                    <header class="review-item__header">
+                        <p class="review-item__author">Critique de {{ review.user }}</p>
+                        <time class="review-item__time">{{ review.time_created }}</time>
+                    </header>
+                    <h3 class="review-item__headline">{{ review.headline }}</h3>
+                    <p class="review-item__rating">
+                        <span class="rating__label">Note :</span>
+                        <span class="rating__stars">{{ review.star_rating }}</span>
+                    </p>
+                    <p class="review-item_body">{{ review.body }}</p>
+
+                    <!-- Résumé du ticket lié -->
+                    <div class="view_ticket_for_review__content">
+                        <div class="ticket-item">
+                            <header class="ticket-item__header">
+                                <p class="ticket-item__author">{{ review.ticket.user }} a demandé une critique</p>
+                                <time class="ticket-item__time">{{ review.ticket.time_created }}</time>
+                            </header>
+                            <h2 class="ticket-item__headline">{{ review.ticket.title }}</h2>
+                            <p class="ticket-item__description">{{ review.ticket.description }}</p>
+                        </div>
+
+                        {% if review.ticket.photo %}
+                        <div class="ticket-item__image-container--thumbnail">
+                            <img class="ticket-item__image image-thumbnail" src="{{ review.ticket.photo.image.url }}" alt="Photo du billet">
+                        </div>
+                        {% endif %}
+                    </div>
+                </section>
+            </article>
+        {% endfor %}
     </section>
 {% endblock content %}

@@ -6,14 +6,20 @@ from .forms import FollowUsersForm
 from . import forms
 
 
+
 @login_required
 def home(request):
-    tickets = Ticket.objects.prefetch_related('review_set') # Récupère tous les tickets
-    photos = Photo.objects.all()
-    #form = TicketForm()  # Formulaire pour créer un nouveau ticket
+    # Récupère tous les tickets avec leurs critiques associées
+    tickets = Ticket.objects.prefetch_related('review_set')
 
-    return render(request, 'reviews/home.html', {'tickets': tickets,'photos': photos})
-#'form': form}
+    # Récupère toutes les critiques avec leur ticket lié
+    reviews = Review.objects.select_related('ticket')
+
+    # Transmet les données au template
+    return render(request, 'reviews/home.html', {
+        'tickets': tickets,
+        'reviews': reviews,  # Ajout des critiques dans le contexte
+    })
 
 # blog/views.py
 @login_required
@@ -114,7 +120,12 @@ def create_ticket_and_review(request):
             review.ticket = ticket
             review.save()
 
-            return redirect('home')  # Redirige vers la page principale après succès
+            return redirect('home')
+        else:
+            # Afficher les erreurs de validation pour débogage
+            print("Erreurs dans ticket_form :", ticket_form.errors)
+            print("Erreurs dans photo_form :", photo_form.errors)
+            # Redirige vers la page principale après succès
 
     context = {
         'ticket_form': ticket_form,

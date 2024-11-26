@@ -4,7 +4,7 @@ from django.contrib.auth import get_user_model
 
 
 class TicketForm(forms.ModelForm):
-    edit_ticket = forms.BooleanField(widget=forms.HiddenInput, initial=True)
+    edit_ticket = forms.BooleanField(widget=forms.HiddenInput, required=False,initial=True)
     class Meta:
         model = Ticket
         fields = ['title', 'description']
