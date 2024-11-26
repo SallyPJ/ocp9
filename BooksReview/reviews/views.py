@@ -1,6 +1,7 @@
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponseForbidden
+from django.db.models import Q
 from .models import Ticket, Photo, Review, UserFollows
 from .forms import FollowUsersForm
 from . import forms
@@ -9,11 +10,16 @@ from . import forms
 
 @login_required
 def home(request):
+    followed_users = request.user.following.values_list('followed_user', flat=True)
     # Récupère tous les tickets avec leurs critiques associées
-    tickets = Ticket.objects.prefetch_related('review_set')
+    tickets = Ticket.objects.filter(
+        Q(user__in=followed_users) | Q(user=request.user)
+    ).prefetch_related('review_set')
 
     # Récupère toutes les critiques avec leur ticket lié
-    reviews = Review.objects.select_related('ticket')
+    reviews = Review.objects.filter(
+        Q(user__in=followed_users) | Q(user=request.user)
+    ).select_related('ticket')
 
     # Transmet les données au template
     return render(request, 'reviews/home.html', {
