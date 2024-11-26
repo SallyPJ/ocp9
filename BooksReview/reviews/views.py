@@ -5,6 +5,7 @@ from django.db.models import Q
 from .models import Ticket, Photo, Review, UserFollows
 from .forms import FollowUsersForm
 from . import forms
+from itertools import chain
 
 
 
@@ -21,13 +22,19 @@ def home(request):
         Q(user__in=followed_users) | Q(user=request.user)
     ).select_related('ticket')
 
+    posts = sorted(chain(tickets, reviews),
+                   key=lambda instance: instance.time_created,
+                   reverse=True)
+    print("Tickets :", list(tickets))
+    print("Reviews :", list(reviews))
+    print("Posts combinés :", posts)
+    context = {
+        'posts': posts,
+        }
     # Transmet les données au template
-    return render(request, 'reviews/home.html', {
-        'tickets': tickets,
-        'reviews': reviews,  # Ajout des critiques dans le contexte
-    })
+    return render(request, 'reviews/home.html', context=context)
 
-# blog/views.py
+
 @login_required
 def ticket_and_photo_upload(request):
     ticket_form = forms.TicketForm()
