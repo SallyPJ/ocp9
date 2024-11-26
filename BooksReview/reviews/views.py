@@ -151,8 +151,20 @@ def create_ticket_and_review(request):
 
 @login_required()
 def display_user_posts(request):
+    # Récupérer les tickets de l'utilisateur
     user_tickets = Ticket.objects.filter(user=request.user).prefetch_related('review_set')
-    return render(request, 'reviews/posts.html', {'tickets': user_tickets, 'show_buttons': True})
+
+    # Récupérer les critiques de l'utilisateur
+    user_reviews = Review.objects.filter(user=request.user).select_related('ticket')
+
+    # Fusionner et trier les tickets et critiques par date
+    posts = sorted(
+        chain(user_tickets, user_reviews),
+        key=lambda instance: instance.time_created,
+        reverse=True
+    )
+
+    return render(request, 'reviews/posts.html', {'posts': posts, 'show_buttons': True})
 
 @login_required
 def follow_users_form(request):
