@@ -1,21 +1,25 @@
 {% extends "base.html" %}
 
 {% block content %}
-<div class="container">
-    <h2>Créer un billet et une critique</h2>
-    <form method="post" enctype="multipart/form-data">
-        {% csrf_token %}
-        <!-- Formulaire pour le billet -->
-        <h3>Billet</h3>
-        {{ ticket_form.as_p }}
-        {{ photo_form.as_p }}
+<div class = 'ticket-creation-container'>
+    <h2>Créer une critique</h2>
+    <form method="post" class="ticket-form" enctype="multipart/form-data">
+            <p>Titre :</p>
+            {{ ticket_form.title }}
+            <p>Description :</p>
+            {{ ticket_form.description }}
+            <p>Image :</p>
+            {{ photo_form.as_p }}
+            {% csrf_token %}
 
         <!-- Formulaire pour la critique -->
         <h3>Critique</h3>
         {{ review_form.as_p }}
 
-        <button type="submit" class="btn btn-primary mt-3">Publier</button>
+        <div class="btn-form-container">
+            <button type="submit" class="btn btn-primary btn-form ">Publier</button>
+            <button class="btn btn-secondary btn-form" onclick="history.back()">Retour</button>
+        </div>
     </form>
-    <button class="btn btn-secondary mt-3" onclick="history.back()">⬅ Retour</button>
 </div>
 {% endblock content %}

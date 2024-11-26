@@ -130,15 +130,57 @@ button.navbar__link:hover {
     margin-top: 10px;
 }
 
+.btn-form-container{
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: space-between;
+
+
+}
+.btn-form {
+    align-self: flex-end;
+
+}
 .form-control{
     font-size: 1.2em; /* Agrandit le texte à l'intérieur du champ */
     padding: 10px; /* Ajoute de l'espace autour du texte */
     height: 50px; /* Définit une hauteur plus grande pour le champ */
     box-sizing: border-box; /* Assure que le padding n'affecte pas la largeur totale */
+    width: 100%;
 }
 
 .form-control__larger{
     width: 60%; /* Rend le champ plus large */
+}
+
+.form-control__description{
+    height: 30%;
+
+}
+.form-control__checkbox {
+    display: flex; /* Change la disposition en flexbox */
+    flex-direction: row; /* Aligne les éléments en ligne horizontale */
+    gap: 15px; /* Ajoute un espacement entre les options */
+    list-style: none; /* Supprime les puces par défaut */
+    padding: 0; /* Retire le padding interne */
+    margin: 0; /* Supprime la marge externe */
+}
+
+/* Style des options */
+.form-control__checkbox li {
+    display: inline-block; /* S'assure que chaque option reste inline */
+}
+
+/* Style pour l'étiquette */
+.form-control__checkbox label {
+    display: flex;
+    align-items: center; /* Centre verticalement le texte et l'input */
+    cursor: pointer; /* Change le curseur au survol */
+}
+
+/* Ajoutez des styles pour les radio buttons */
+.form-control__checkbox input[type="radio"] {
+    margin-right: 5px; /* Ajoute un espace entre le bouton et le label */
 }
 
 .signup-form-container{
@@ -152,6 +194,7 @@ button.navbar__link:hover {
 .signup-form-container__form{
     align-self : center;
     justify-self : flex-end;
+    width: 50%;
 
 }
 
@@ -242,6 +285,24 @@ button.navbar__link:hover {
     border-radius: 4px; /* Ajout d'un léger arrondi aux coins */
     object-fit: cover; /* Gère le recadrage des images si nécessaire */
 }
+.ticket-item__image-container--thumbnail{
+    width: 150px; /* Largeur fixe pour la miniature */
+    height: 150px; /* Hauteur fixe pour la miniature */
+    overflow: hidden; /* Masque les parties débordantes de l'image */
+    border-radius: 8px; /* Coins arrondis pour un rendu esthétique */
+    border: 2px solid #ddd; /* Bordure légère pour encadrer la miniature */
+    display: flex;
+    justify-content: center; /* Centre horizontalement l'image */
+    align-items: center; /* Centre verticalement l'image */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Ombre légère */
+}
+
+.image-thumbnail {
+    max-width: 100%; /* Limite la largeur de l'image à celle de la carte */width: 100%; /* Ajuste la largeur de l'image au conteneur */
+    height: auto; /* Préserve les proportions */
+    object-fit: cover; /* Recadre l'image si nécessaire */
+}
+
 
 .ticket-item__buttons--edit {
     display: flex;
@@ -258,3 +319,59 @@ button.navbar__link:hover {
     background-color: #f9f9f9;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
+.view_ticket_for_review{
+    width: 100%;
+    box-sizing: border-box;
+    border: 2px solid #ddd;
+    padding : 2%;
+}
+
+.view_ticket_for_review__content{
+    max-width: 50%;
+    width: auto;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    padding : 2%;
+    border: 2px solid #ddd;
+    border-radius: 8px; /* Coins arrondis */
+    background-color: #f9f9f9; /* Fond blanc */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Ombre pour l'esthéré */
+}
+.create-review-container{
+    width: 100%;
+    box-sizing: border-box;
+}
+.rating__stars {
+    font-size: 1.5rem; /* Taille des étoiles */
+    color: #FFD700; /* Couleur des étoiles (doré) */
+    letter-spacing: 2px; /* Espacement entre les étoiles */
+}
+
+.ticket-creation-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    margin-top: 2%;
+    margin : 5%;
+    padding : 2%;
+    border: 2px solid #ddd;
+    border-radius: 8px; /* Coins arrondis */
+    background-color: #f9f9f9; /* Fond blanc */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Ombre pour l'esthétique */
+}
+
+.ticket-creation-container p{
+    font-size: 1.2em;
+    font-weight: bold;
+    }
+
+.ticket-form{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+
+}
+

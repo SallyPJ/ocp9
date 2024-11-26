@@ -15,7 +15,10 @@
                                         <time class="review-item__time" datetime="{{ review.time_created|date:'c' }}">{{ review.time_created|date:'H:i, d F Y' }}</time>
                                     </header>
                                     <h3 class="review-item__headline">{{ review.headline }}</h3>
-                                    <p class="review-item__rating">Note : {{ review.rating }} ★</p>
+                                    <p class="review-item__rating">
+                                        <span class="rating__label">Note :</span>
+                                        <span class="rating__stars">{{ review.star_rating }}</span>
+                                    </p>
                                     <p class="review-item_body">{{ review.body }}</p>
                                 </div>
                             {% endfor %}

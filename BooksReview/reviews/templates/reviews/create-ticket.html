@@ -1,11 +1,20 @@
 {% extends 'base.html' %}
 {% block content %}
-    <h2>Créer un ticket</h2>
-    <form method="post" enctype="multipart/form-data">
-        {{ ticket_form.as_p }}
-        {{ photo_form.as_p }}
-        {% csrf_token %}
-        <button type="submit" class="btn btn-primary">Publier</button>
-    </form>
- <button class="btn btn-secondary" onclick="history.back()">⬅ Retour</button>
+    <div class = 'ticket-creation-container'>
+        <h2>Créer un ticket</h2>
+        <form method="post" class="ticket-form" enctype="multipart/form-data">
+            <p>Titre :</p>
+            {{ ticket_form.title }}
+            <p>Description :</p>
+            {{ ticket_form.description }}
+            <p>Image :</p>
+            {{ photo_form.as_p }}
+            {% csrf_token %}
+            <div class="btn-form-container">
+                <button type="submit" class="btn btn-primary btn-form ">Publier</button>
+                <button class="btn btn-secondary btn-form" onclick="history.back()">Retour</button>
+            </div>
+        </form>
+
+    </div>
 {% endblock content %}
