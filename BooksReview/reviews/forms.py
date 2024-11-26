@@ -1,6 +1,7 @@
 from django import forms
 from .models import Ticket, Photo, Review
 from django.contrib.auth import get_user_model
+from django.core.exceptions import ValidationError
 
 
 class TicketForm(forms.ModelForm):
@@ -74,15 +75,27 @@ User = get_user_model()
 
 
 class FollowUsersForm(forms.Form):
-    followed_user = forms.ModelChoiceField(
-        queryset=User.objects.none(),
-        label="Utilisateur à suivre",
-        widget=forms.Select
+    followed_username = forms.CharField(
+        label="Nom d'utilisateur à suivre",
+        max_length=150,
+        widget=forms.TextInput(attrs={'placeholder': 'Nom d\'utilisateur'})
     )
 
     def __init__(self, *args, **kwargs):
-        user = kwargs.pop('user', None)  # Récupérer l'utilisateur connecté
+        self.user = kwargs.pop('user', None)  # Récupérer l'utilisateur connecté
         super().__init__(*args, **kwargs)
-        if user:
-            # Exclure l'utilisateur connecté pour éviter de se suivre soi-même
-            self.fields['followed_user'].queryset = User.objects.exclude(id=user.id)
+
+    def clean_followed_username(self):
+        username = self.cleaned_data['followed_username']
+
+        # Vérifier que l'utilisateur existe
+        try:
+            followed_user = User.objects.get(username=username)
+        except User.DoesNotExist:
+            raise ValidationError("Cet utilisateur n'existe pas.")
+
+        # Empêcher de se suivre soi-même
+        if self.user and followed_user == self.user:
+            raise ValidationError("Vous ne pouvez pas vous suivre vous-même.")
+
+        return followed_user  # Retourne l'objet User, pas une chaîne
