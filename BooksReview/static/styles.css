@@ -223,7 +223,6 @@ button.navbar__link:hover {
 .form-control__searchbar{
     width: 100%;
     box-sizing: border-box;
-
 }
 
 .signup-form-container{
@@ -231,7 +230,6 @@ button.navbar__link:hover {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-
 }
 
 .signup-form-container__form{
@@ -253,6 +251,7 @@ button.navbar__link:hover {
     font-weight: bold;
     margin-top : 2%;
 }
+
 .feed-main-content {
     padding-left : 20%;
     padding-right : 20%;
@@ -282,38 +281,38 @@ button.navbar__link:hover {
     flex-direction: column;
 }
 
-.ticket-item {
+.post-item {
     display: flex;
     flex-direction: column;
     overflow: hidden;
 }
 
-.ticket-item__header {
+.post-item__header {
     display: flex; /* Active le mode Flexbox pour aligner les éléments horizontalement */
     justify-content: space-between; /* Place les éléments aux extrémités (gauche et droite) */
     align-items: center; /* Centre verticalement l'auteur et le temps */
     margin-bottom: 10px;
 }
 
-.ticket-item__author {
+.post-item__author {
     font-weight: bold;
     font-size: 1rem;
 }
 
-.ticket-item__time {
+.post-item__time {
     font-size: 0.9rem;
     color: #555;
     align-self: flex-end;
 }
 
 /* Contenu */
-.ticket-item__headline {
+.post-item__headline {
     font-size: 1.2rem;
     font-weight: bold;
     margin-bottom: 10px;
 }
 
-.ticket-item__description {
+.post-item__description {
     margin-bottom: 15px;
     line-height: 1.5;
     color: #333;
@@ -345,31 +344,15 @@ button.navbar__link:hover {
 }
 
 
-.ticket-item__buttons--edit {
+.post-item__buttons--edit {
     display: flex;
     justify-content: flex-end;
     align-items: center;
     margin-top: 10px;
 }
 
-.review-item {
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    padding: 10px;
-    margin-bottom: 10px;
-    background-color: #f9f9f9;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-}
-.view_ticket_for_review{
-    width: 100%;
-    box-sizing: border-box;
-    border: 2px solid #ddd;
-    padding : 2%;
-}
-
-.view_ticket_for_review__content{
-    max-width: 50%;
-    width: auto;
+.ticket-summary{
+    width: 95%;
     height: auto;
     display: flex;
     flex-direction: column;
