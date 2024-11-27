@@ -1,3 +1,4 @@
+{% load reviews-extras %}
 {% block content %}
     <section class="feed-container">
 
@@ -9,7 +10,9 @@
                     {% with obj as ticket %}
                     <section class="ticket-item">
                         <header class="ticket-item__header">
-                            <p class="ticket-item__author">{{ ticket.user }} a demandé une critique</p>
+                            <p class="ticket-item__author">
+                                {% get_poster_display ticket.user %} demandé une critique
+                            </p>
                             <time class="ticket-item__time">{{ ticket.time_created }}</time>
                         </header>
                         <h2 class="ticket-item__headline">{{ ticket.title }}</h2>
@@ -40,7 +43,7 @@
                     {% with obj as review %}
                     <section class="review-item">
                         <header class="review-item__header">
-                            <p class="review-item__author">Critique de {{ review.user }}</p>
+                            <p class="review-item__author">{% get_poster_display review.user %} publié une critique</p>
                             <time class="review-item__time">{{ review.time_created }}</time>
                         </header>
                         <h3 class="review-item__headline">{{ review.headline }}</h3>
