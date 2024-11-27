@@ -11,15 +11,28 @@ from itertools import chain
 
 @login_required
 def home(request):
+    # Liste des utilisateurs bloqués par l'utilisateur connecté
+    blocked_users = UserFollows.objects.filter(user=request.user, blocked=True).values_list('followed_user', flat=True)
+
+    # Liste des utilisateurs ayant bloqué l'utilisateur connecté
+    blocked_by_users = UserFollows.objects.filter(followed_user=request.user, blocked=True).values_list('user',
+                                                                                                        flat=True)
+
+    # Liste combinée des utilisateurs bloqués dans les deux sens
+    blocked_combined = set(blocked_users).union(set(blocked_by_users))
+
     followed_users = request.user.following.values_list('followed_user', flat=True)
+
     # Récupère tous les tickets avec leurs critiques associées
     tickets = Ticket.objects.filter(
-        Q(user__in=followed_users) | Q(user=request.user)
+        (Q(user__in=followed_users) | Q(user=request.user))
+        & ~Q(user__in=blocked_combined)  # Exclure les utilisateurs bloqués
     ).prefetch_related('review_set')
 
     # Récupère toutes les critiques avec leur ticket lié
     reviews = Review.objects.filter(
-        Q(user__in=followed_users) | Q(user=request.user)
+        (Q(user__in=followed_users) | Q(user=request.user))
+        & ~Q(user__in=blocked_combined)  # Exclure les utilisateurs bloqués
     ).select_related('ticket')
 
     posts = sorted(chain(tickets, reviews),
