@@ -33,7 +33,7 @@
                             </div>
                         {% endif %}
 
-                        {% if not show_buttons and not ticket.review_set.all %}
+                        {% if not show_buttons and not ticket.user_has_reviewed %}
                             <button type="button" class="btn btn-primary btn-create-review" onclick="window.location.href='{% url 'create-review' ticket.id %}'">Créer une critique</button>
                         {% endif %}
                     </section>

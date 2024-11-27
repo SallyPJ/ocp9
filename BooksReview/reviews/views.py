@@ -23,11 +23,16 @@ def home(request):
 
     followed_users = request.user.following.values_list('followed_user', flat=True)
 
+    # Liste des utilisateurs qui sont suivis par l'utilisateur connecté
     # Récupère tous les tickets avec leurs critiques associées
     tickets = Ticket.objects.filter(
         (Q(user__in=followed_users) | Q(user=request.user))
         & ~Q(user__in=blocked_combined)  # Exclure les utilisateurs bloqués
     ).prefetch_related('review_set')
+
+    # Ajouter une annotation pour vérifier si l'utilisateur a écrit une critique sur chaque ticket
+    for ticket in tickets:
+        ticket.user_has_reviewed = ticket.review_set.filter(user=request.user).exists()
 
     # Récupère toutes les critiques avec leur ticket lié
     reviews = Review.objects.filter(
