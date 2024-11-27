@@ -76,9 +76,10 @@ User = get_user_model()
 
 class FollowUsersForm(forms.Form):
     followed_username = forms.CharField(
-        label="Nom d'utilisateur à suivre",
+        label='',
         max_length=150,
-        widget=forms.TextInput(attrs={'placeholder': 'Nom d\'utilisateur'})
+        widget=forms.TextInput(attrs={'placeholder': 'Nom d\'utilisateur',
+                                      'class': 'form-control form-control__searchbar' })
     )
 
     def __init__(self, *args, **kwargs):

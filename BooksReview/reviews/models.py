@@ -67,6 +67,7 @@ class UserFollows(models.Model):
         related_name='followed_by'
     )
 
+    blocked = models.BooleanField(default=False)
     class Meta:
             # ensures we don't get multiple UserFollows instances
             # for unique user-user_followed pairs

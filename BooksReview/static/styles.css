@@ -112,10 +112,10 @@ button.navbar__link:hover {
 
 .btn-primary:hover{
     background-color: #256b44;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 4px 6px r
 }
 
-.btn-secondary{
+.btn-secondary{gba(0, 0, 0, 0.2);
     background-color: #6C757D;
     font-weight: bold
 }
@@ -125,10 +125,48 @@ button.navbar__link:hover {
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
 }
 
+/* Bouton Warning */
+.btn-warning {
+    background-color: #ffc107; /* Jaune vif */
+    color: black; /* Texte gris clair pour meilleur contraste */
+    border: none; /* Supprime la bordure */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Ombre légère */
+}
+
+.btn-warning:hover {
+    background-color: #e0a800; /* Jaune foncé au survol */
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2); /* Accentue l'ombre au survol */
+}
+
+.btn-warning:active {
+    background-color: #d39e00; /* Jaune encore plus foncé au clic */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Ombre réduite lors du clic */
+}
+
+/* Bouton Danger */
+.btn-danger {
+    background-color: #FF6B6B; /* Rouge vif */
+    color: black; /* Texte gris clair pour meilleur contraste */
+    border: none; /* Supprime la bordure */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Ombre légère */
+}
+
+.btn-danger:hover {
+    background-color: #FF4C4C; /* Rouge plus foncé au survol */
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2); /* Accentue l'ombre au survol */
+}
+
+.btn-danger:active {
+    background-color: #FF2E2E; /* Rouge encore plus foncé au clic */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Ombre réduite lors du clic */
+}
+
 .btn-create-review{
+    padding: 10px 20px;
     align-self: flex-end;
     margin-top: 10px;
 }
+
 
 .btn-form-container{
     display: flex;
@@ -181,6 +219,11 @@ button.navbar__link:hover {
 /* Ajoutez des styles pour les radio buttons */
 .form-control__checkbox input[type="radio"] {
     margin-right: 5px; /* Ajoute un espace entre le bouton et le label */
+}
+.form-control__searchbar{
+    width: 100%;
+    box-sizing: border-box;
+
 }
 
 .signup-form-container{
@@ -237,14 +280,12 @@ button.navbar__link:hover {
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Ombre pour l'esthétique */
     display: flex;
     flex-direction: column;
-
 }
 
 .ticket-item {
     display: flex;
     flex-direction: column;
     overflow: hidden;
-
 }
 
 .ticket-item__header {
@@ -349,7 +390,7 @@ button.navbar__link:hover {
     letter-spacing: 2px; /* Espacement entre les étoiles */
 }
 
-.ticket-creation-container {
+.page-layout {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -363,15 +404,52 @@ button.navbar__link:hover {
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Ombre pour l'esthétique */
 }
 
+.page-layout section{
+    width: 100%;
+}
+
 .ticket-creation-container p{
     font-size: 1.2em;
     font-weight: bold;
-    }
+}
 
 .ticket-form{
     width: 100%;
     display: flex;
     flex-direction: column;
-
 }
 
+.follow-user-table {
+    width: 100%; /* Utiliser toute la largeur disponible */
+    border-collapse: collapse; /* Éliminer les espaces entre les bordures */
+    margin: 20px 0; /* Ajouter de l'espace au-dessus et en dessous */
+    text-align: left; /* Alignement du texte dans les cellules */
+    font-size: 1.2em;
+}
+
+.follow-user-table tr{
+    border: 1px solid #cccc; /* Ajoute une bordure légère */
+    padding: 8px; /* Ajoute un peu d'espace autour du contenu */
+}
+
+.follow-user-table td{
+   display: flex; /* Active le mode flexbox */
+   justify-content: space-between; /* Éloigne les deux éléments (texte à gauche, bouton à droite) */
+   align-items: center;
+   padding: 8px;
+}
+
+.follow-user-table tbody{
+    padding:0px;
+}
+.follow-user-table__form{
+   margin: 0;
+}
+
+.follow-user-field{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+
+
+}

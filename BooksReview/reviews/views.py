@@ -179,6 +179,12 @@ def follow_users_form(request):
             follow_id = request.POST.get('unfollow_user')
             UserFollows.objects.filter(id=follow_id, user=request.user).delete()
 
+        elif 'block_user' in request.POST:  # Bloquer/Débloquer un utilisateur
+            follow_id = request.POST.get('block_user')
+            follow_relation = get_object_or_404(UserFollows, id=follow_id, followed_user=request.user)
+            follow_relation.blocked = not follow_relation.blocked  # Inverse l'état de blocage
+            follow_relation.save()
+
         return redirect('follow-users-form')
 
     form = FollowUsersForm(user=request.user)
@@ -190,3 +196,5 @@ def follow_users_form(request):
         'followed_users': followed_users,
         'followers': followers,
     })
+
+

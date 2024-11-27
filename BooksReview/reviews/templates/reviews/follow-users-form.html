@@ -1,39 +1,70 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <h2>Gérer vos abonnements</h2>
+<div class ="page-layout">
+    <section>
+        <h2>Suivre d'autres utilisateurs</h2>
 
-    <!-- Formulaire pour suivre un utilisateur -->
-    <form method="post">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit" name="follow_user">Suivre</button>
-    </form>
+        <!-- Formulaire pour suivre un utilisateur -->
+        <form method="post" class="follow-user-field">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" name="follow_user" class="btn btn-primary">Envoyer</button>
+        </form>
+    </section>
+    <section>
+        <!-- Liste des utilisateurs suivis -->
+        <h2>Abonnements :</h2>
+        {% if followed_users %}
+        <table class="follow-user-table">
+            <tbody>
+                {% for follow in followed_users %}
+                <tr>
+                    <td>
+                        <span>{{ follow.followed_user.username }}</span>
+                        <!-- Bouton pour se désabonner -->
+                        <form method="post" class="follow-user-table__form">
+                            {% csrf_token %}
+                            <button type="submit" name="unfollow_user" value="{{ follow.id }}" class="btn btn-warning">Se désabonner</button>
+                        </form>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% else %}
+        <p>Vous ne suivez aucun utilisateur pour l'instant.</p>
+        {% endif %}
+    </section>
+    <section>
+        <h2>Abonnés :</h2>
 
-    <!-- Liste des utilisateurs suivis -->
-    <h3>Vous suivez :</h3>
-    <ul>
-        {% for follow in followed_users %}
-            <li>
-                {{ follow.followed_user.username }}
-                <!-- Bouton pour se désabonner -->
-                <form method="post" style="display:inline;">
-                    {% csrf_token %}
-                    <button type="submit" name="unfollow_user" value="{{ follow.id }}">Se désabonner</button>
-                </form>
-            </li>
-        {% empty %}
-            <p>Vous ne suivez aucun utilisateur pour l'instant.</p>
-        {% endfor %}
-    </ul>
-
-    <!-- Liste des abonnés -->
-    <h3>Vos abonnés :</h3>
-    <ul>
-        {% for follower in followers %}
-            <li>{{ follower.user.username }}</li>
-        {% empty %}
-            <p>Vous n'avez aucun abonné pour l'instant.</p>
-        {% endfor %}
-    </ul>
+        {% if followers %}
+        <table class="follow-user-table">
+            <tbody>
+                {% for follower in followers %}
+                <tr>
+                    <!-- Colonne pour le nom d'utilisateur -->
+                    <td>
+                      <span >{{ follower.user.username }}</span>
+                    <!-- Colonne pour le statut -->
+                    <!-- Colonne pour le bouton d'action -->
+                        <form method="post" action="" class="follow-user-table__form">
+                            {% csrf_token %}
+                            {% if follower.blocked %}
+                                <button type="submit" name="block_user" value="{{ follower.id }}" class="btn btn-danger">Débloquer</button>
+                            {% else %}
+                                <button type="submit" name="block_user" value="{{ follower.id }}" class="btn btn-warning">Bloquer</button>
+                            {% endif %}
+                        </form>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% else %}
+        <p>Vous n'avez aucun abonné pour l'instant.</p>
+        {% endif %}
+    </section>
+</div>
 {% endblock content %}
