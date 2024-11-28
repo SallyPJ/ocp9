@@ -36,7 +36,9 @@ def home(request):
 
     # Récupère toutes les critiques avec leur ticket lié
     reviews = Review.objects.filter(
-        (Q(user__in=followed_users) | Q(user=request.user))
+        (Q(user__in=followed_users) |  # Reviews des utilisateurs suivis
+         Q(user=request.user) |  # Reviews de l'utilisateur connecté
+         Q(ticket__user=request.user))  # Reviews des tickets créés par l'utilisateur connecté
         & ~Q(user__in=blocked_combined)  # Exclure les utilisateurs bloqués
     ).select_related('ticket')
 
