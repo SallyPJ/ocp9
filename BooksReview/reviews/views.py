@@ -3,7 +3,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponseForbidden
 from django.db.models import Q
 from .models import Ticket, Photo, Review, UserFollows
-from .forms import FollowUsersForm
+from .forms import FollowUsersForm, ReviewForm, TicketForm, PhotoForm
 from . import forms
 from itertools import chain
 
@@ -56,56 +56,62 @@ def home(request):
 
 
 @login_required
-def ticket_and_photo_upload(request):
-    ticket_form = forms.TicketForm()
-    photo_form = forms.PhotoForm()
+def create_or_edit_ticket(request, ticket_id=None):
+    # Si `ticket_id` est fourni, on édite un ticket existant, sinon on crée un nouveau ticket
+    if ticket_id:
+        ticket = get_object_or_404(Ticket, id=ticket_id)
+        if ticket.user != request.user:
+            return HttpResponseForbidden("Vous n'êtes pas autorisé à modifier ce billet.")
+    else:
+        ticket = Ticket(user=request.user)
+
+    # Initialisez les formulaires
+    ticket_form = TicketForm(instance=ticket)
+    photo_form = PhotoForm(instance=ticket.photo)
+
     if request.method == 'POST':
-        ticket_form = forms.TicketForm(request.POST)
-        photo_form = forms.PhotoForm(request.POST, request.FILES)
-        if all([ticket_form.is_valid(), photo_form.is_valid()]):
-            photo = photo_form.save(commit=False)
-            photo.uploader = request.user
-            photo.save()
+        ticket_form = TicketForm(request.POST, instance=ticket)
+        photo_form = PhotoForm(request.POST, request.FILES, instance=ticket.photo)
+
+        if ticket_form.is_valid() and photo_form.is_valid():
+            # Sauvegarder le ticket
             ticket = ticket_form.save(commit=False)
-            ticket.user = request.user
-            ticket.photo = photo
+
+            # Sauvegarder ou mettre à jour l'image
+            if photo_form.cleaned_data.get('image'):
+                photo = photo_form.save(commit=False)
+                photo.uploader = request.user
+                photo.save()
+                ticket.photo = photo
+
             ticket.save()
-            return redirect('home')
+            return redirect('home')  # Redirige vers la page des posts
+
     context = {
         'ticket_form': ticket_form,
         'photo_form': photo_form,
-}
-    return render(request, 'reviews/create-ticket.html', context=context)
+        'is_edit': ticket_id is not None,  # Indique si c'est une édition
+    }
+    return render(request, 'reviews/manage-ticket.html', context)
 
 @login_required
 def view_ticket(request, ticket_id):
     ticket = get_object_or_404(Ticket, id=ticket_id)
     return render(request, 'reviews/display-tickets.html', {'ticket': ticket})
 
-
-@login_required
-def edit_ticket(request, ticket_id):
+@login_required()
+def delete_ticket(request, ticket_id):
     ticket = get_object_or_404(Ticket, id=ticket_id)
+
+    # Vérifie que l'utilisateur est le propriétaire du ticket
     if ticket.user != request.user:
-        return HttpResponseForbidden("Vous n'êtes pas autorisé à modifier ce billet.")
-    edit_form = forms.TicketForm(instance=ticket)
-    delete_form = forms.DeleteTicketForm()
+        return HttpResponseForbidden("Vous n'êtes pas autorisé à supprimer ce billet.")
+
     if request.method == 'POST':
-        if 'edit_ticket' in request.POST:
-            edit_form = forms.TicketForm(request.POST, instance=ticket)
-            if edit_form.is_valid():
-                edit_form.save()
-                return redirect('posts')
-        if 'delete_ticket' in request.POST:
-            delete_form = forms.DeleteTicketForm(request.POST)
-            if delete_form.is_valid():
-                ticket.delete()
-                return redirect('posts')
-    context = {
-        'edit_form': edit_form,
-        'delete_form': delete_form,
-    }
-    return render(request, 'reviews/edit-ticket.html', context=context)
+        ticket.delete()
+        return redirect('posts')  # Redirige après la suppression
+
+    return render(request, 'reviews/confirm-delete.html', {'ticket': ticket})
 
 
 @login_required
@@ -127,6 +133,27 @@ def create_review(request,ticket_id):
     }
     return render(request, 'reviews/create-review.html', context=context)
 
+@login_required
+def edit_review(request, review_id):
+    review = get_object_or_404(Review, id=review_id)
+
+    # Vérifie si l'utilisateur est l'auteur de la critique
+    if review.user != request.user:
+        return HttpResponseForbidden("Vous n'êtes pas autorisé à modifier cette critique.")
+
+    review_form = ReviewForm(instance=review)
+
+    if request.method == 'POST':
+        review_form = ReviewForm(request.POST, instance=review)
+        if review_form.is_valid():
+            review_form.save()
+            return redirect('posts')  # Redirige vers la liste des posts après sauvegarde
+
+    context = {
+        'review_form': review_form,
+        'review': review,
+    }
+    return render(request, 'reviews/edit-review.html', context=context)
 @login_required
 def create_ticket_and_review(request):
     ticket_form = forms.TicketForm()

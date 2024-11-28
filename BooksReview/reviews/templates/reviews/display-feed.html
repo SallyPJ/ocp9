@@ -1,7 +1,6 @@
 {% load reviews-extras %}
 {% block content %}
-    <section class="feed-container">
-
+    <main class="feed-container">
         <!-- Boucle unique sur posts -->
         {% for obj in posts %}
             <article class="feed-container__item">
@@ -25,11 +24,21 @@
                         {% if show_buttons and ticket.user == request.user %}
                             <div class="post-item__buttons--edit">
                                 <a href="{% url 'edit_ticket' ticket.id %}" class="btn btn-primary">Modifier</a>
-                                <form method="post" action="{% url 'edit_ticket' ticket.id %}">
-                                    {{ delete_form }}
-                                    {% csrf_token %}
-                                    <button type="submit" name="delete_ticket" class="btn btn-secondary">Supprimer</button>
-                                </form>
+                                 <!-- Lien pour ouvrir la modale -->
+                                <a href="#confirm-delete-{{ ticket.id }}" class="btn btn-danger">Supprimer</a>
+                            </div>
+
+                            <!-- Modale de confirmation -->
+                            <div id="confirm-delete-{{ ticket.id }}" class="modal" aria-labelledby="modal-title" role="dialog">
+                                <div class="modal-content">
+                                    <h3>Confirmer la suppression</h3>
+                                    <p>Êtes-vous sûr de vouloir supprimer ce billet ? Cette action est irréversible.</p>
+                                    <form method="post" action="{% url 'delete-ticket' ticket.id %}">
+                                        {% csrf_token %}
+                                        <button type="submit" class="btn btn-danger">Confirmer</button>
+                                    </form>
+                                    <a href="#" class="btn btn-secondary">Annuler</a>
+                                </div>
                             </div>
                         {% endif %}
 
@@ -78,6 +87,6 @@
                 {% endif %}
             </article>
         {% endfor %}
+    </main>
 
-    </section>
 {% endblock content %}
