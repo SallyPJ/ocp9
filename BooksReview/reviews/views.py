@@ -94,10 +94,7 @@ def create_or_edit_ticket(request, ticket_id=None):
     }
     return render(request, 'reviews/manage-ticket.html', context)
 
-@login_required
-def view_ticket(request, ticket_id):
-    ticket = get_object_or_404(Ticket, id=ticket_id)
-    return render(request, 'reviews/display-tickets.html', {'ticket': ticket})
+
 
 @login_required()
 def delete_ticket(request, ticket_id):
@@ -115,45 +112,55 @@ def delete_ticket(request, ticket_id):
 
 
 @login_required
-def create_review(request,ticket_id):
-    ticket = get_object_or_404(Ticket, id=ticket_id)
-    review_form = forms.ReviewForm()
-    if request.method == 'POST':
-        review_form = forms.ReviewForm(request.POST)
-        if review_form.is_valid():
-            review = review_form.save(commit=False)
-            review.user = request.user
-            review.ticket = ticket
-            review.save()
-            return redirect('home')
+def create_or_edit_review(request, ticket_id=None, review_id=None):
+    # Récupère le ticket si ticket_id est fourni
+    if ticket_id:
+        ticket = get_object_or_404(Ticket, id=ticket_id)
+    else:
+        ticket = None
 
-    context = {
-        'review_form': review_form,
-        'ticket': ticket,
-    }
-    return render(request, 'reviews/create-review.html', context=context)
+    # Récupère ou initialise une review
+    if review_id:
+        review = get_object_or_404(Review, id=review_id)
+        if review.user != request.user:
+            return HttpResponseForbidden("Vous n'êtes pas autorisé à modifier cette critique.")
+    else:
+        review = Review(ticket=ticket, user=request.user)
 
-@login_required
-def edit_review(request, review_id):
-    review = get_object_or_404(Review, id=review_id)
-
-    # Vérifie si l'utilisateur est l'auteur de la critique
-    if review.user != request.user:
-        return HttpResponseForbidden("Vous n'êtes pas autorisé à modifier cette critique.")
-
+    # Pré-remplit le formulaire
     review_form = ReviewForm(instance=review)
 
     if request.method == 'POST':
         review_form = ReviewForm(request.POST, instance=review)
         if review_form.is_valid():
-            review_form.save()
-            return redirect('posts')  # Redirige vers la liste des posts après sauvegarde
+            review = review_form.save(commit=False)
+            if not review_id:
+                review.ticket = ticket  # Associe le ticket lors de la création
+            review.save()
+            return redirect('posts')  # Redirige après modification ou création
 
     context = {
         'review_form': review_form,
-        'review': review,
+        'ticket': ticket,
+        'is_edit': review_id is not None,
     }
-    return render(request, 'reviews/edit-review.html', context=context)
+    return render(request, 'reviews/manage-review.html', context)
+
+
+@login_required()
+def delete_review(request, review_id):
+    review = get_object_or_404(Review, id=review_id)
+
+    if review.user != request.user:
+        return HttpResponseForbidden("Vous n'êtes pas autorisé à supprimer cette critique.")
+
+    if request.method == 'POST':
+        review.delete()
+        return redirect('posts')
+
+    context = {'review': review}
+    return render(request, 'reviews/confirm-delete-review.html', context)
+
 @login_required
 def create_ticket_and_review(request):
     ticket_form = forms.TicketForm()
