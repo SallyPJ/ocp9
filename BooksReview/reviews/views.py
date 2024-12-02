@@ -218,7 +218,8 @@ def display_user_posts(request):
         reverse=True
     )
 
-    return render(request, 'reviews/posts.html', {'posts': posts, 'show_buttons': True})
+    return render(request, 'reviews/posts.html',
+                  {'posts': posts, 'show_buttons': True})
 
 @login_required
 def follow_users_form(request):

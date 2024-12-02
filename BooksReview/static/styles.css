@@ -6,6 +6,7 @@ body {
     height: auto;
     overflow: visible;
     padding: 10px;
+    font-size: 16px;
 
 }
 
@@ -290,6 +291,7 @@ button.navbar__link:hover {
     display: flex;
     flex-direction: column;
     overflow: hidden;
+
 }
 
 .post-item__header {
@@ -324,11 +326,11 @@ button.navbar__link:hover {
 }
 
 /* Image */
-.ticket-item__image img {
-    max-width: 100%; /* Limite la largeur de l'image à celle de la carte */
-    height: auto; /* Préserve le ratio de l'image */
-    border-radius: 4px; /* Ajout d'un léger arrondi aux coins */
-    object-fit: cover; /* Gère le recadrage des images si nécessaire */
+.ticket-item__image  {
+    max-width: 400px;  /* Taille maximale réelle après redimensionnement */
+    max-height: 400px; /* Taille maximale réelle après redimensionnement */
+    object-fit: contain;
+    display: block;
 }
 .ticket-item__image-container--thumbnail{
     width: 150px; /* Largeur fixe pour la miniature */

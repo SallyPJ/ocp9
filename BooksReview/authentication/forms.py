@@ -22,6 +22,10 @@ class SignupForm(UserCreationForm):
         model = get_user_model()
         fields = ['username']
 
+    def clean_username(self):
+        username = self.cleaned_data['username']
+        return username.lower()
+
 
 class CustomAuthenticationForm(AuthenticationForm):
     username = forms.CharField(
