@@ -85,7 +85,10 @@ def create_or_edit_ticket(request, ticket_id=None):
                 ticket.photo = photo
 
             ticket.save()
-            return redirect('home')  # Redirige vers la page des posts
+            if ticket_id:  # Modification
+                return redirect('posts')
+            else:  # Création
+                return redirect('home')
 
     context = {
         'ticket_form': ticket_form,
@@ -124,6 +127,7 @@ def create_or_edit_review(request, ticket_id=None, review_id=None):
         review = get_object_or_404(Review, id=review_id)
         if review.user != request.user:
             return HttpResponseForbidden("Vous n'êtes pas autorisé à modifier cette critique.")
+        ticket = review.ticket
     else:
         review = Review(ticket=ticket, user=request.user)
 
@@ -137,7 +141,10 @@ def create_or_edit_review(request, ticket_id=None, review_id=None):
             if not review_id:
                 review.ticket = ticket  # Associe le ticket lors de la création
             review.save()
-            return redirect('posts')  # Redirige après modification ou création
+            if review_id:  # Modification
+                return redirect('posts')
+            else:  # Création
+                return redirect('home')
 
     context = {
         'review_form': review_form,
@@ -178,7 +185,14 @@ def create_ticket_and_review(request):
             photo.save()
             ticket = ticket_form.save(commit=False)
             ticket.user = request.user
-            ticket.photo = photo
+            # Gestion de l'image optionnelle
+            if photo_form.cleaned_data.get('image'):  # Vérifie si une image a été téléchargée
+                photo = photo_form.save(commit=False)
+                photo.uploader = request.user
+                photo.save()
+                ticket.photo = photo
+            else:
+                ticket.photo = None
             ticket.save()
 
             # Sauvegarde de la critique liée au ticket
@@ -186,13 +200,11 @@ def create_ticket_and_review(request):
             review.user = request.user
             review.ticket = ticket
             review.save()
-
             return redirect('home')
         else:
             # Afficher les erreurs de validation pour débogage
             print("Erreurs dans ticket_form :", ticket_form.errors)
             print("Erreurs dans photo_form :", photo_form.errors)
-            # Redirige vers la page principale après succès
 
     context = {
         'ticket_form': ticket_form,

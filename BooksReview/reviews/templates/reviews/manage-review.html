@@ -1,19 +1,19 @@
 {% extends 'base.html' %}
 {% block content %}
 <main class="page-layout">
-    <section class="view_ticket_for_review">
+    <section class="ticket-summary">
         <p>Vous êtes en train de poster en réponse à :</p>
-        <div class="view_ticket_for_review__content">
-            <div class="ticket-item">
-                <header class="ticket-item__header">
-                    <p class="ticket-item__author">{{ ticket.user }} a demandé une critique</p>
-                    <time class="ticket-item__time">{{ ticket.time_created }}</time>
+        <div class="ticket-summary__content">
+            <div class="post-item">
+                <header class="post-item__header">
+                    <p class="post-item__author">{{ ticket.user }} a demandé une critique</p>
+                    <time class="post-item__time">{{ ticket.time_created }}</time>
                 </header>
-                <h2 class="ticket-item__headline">{{ ticket.title }}</h2>
-                <p class="ticket-item__description">{{ ticket.description }}</p>
+                <h2 class="post-item__headline">{{ ticket.title }}</h2>
+                <p class="post-item__description">{{ ticket.description }}</p>
             </div>
 
-            {% if ticket.photo %}
+            {% if ticket.photo and ticket.photo.image %}
             <div class="ticket-item__image-container--thumbnail">
                 <img class="ticket-item__image image-thumbnail" src="{{ ticket.photo.image.url }}" alt="Photo du billet">
             </div>

@@ -17,7 +17,7 @@
                         <h2 class="post-item__headline">{{ ticket.title }}</h2>
                         <p class="post-item__description">{{ ticket.description }}</p>
 
-                        {% if ticket.photo %}
+                        {% if ticket.photo and ticket.photo.image %}
                             <img class="ticket-item__image" src="{{ ticket.photo.image.url }}" alt="Photo du billet">
                         {% endif %}
 
@@ -63,7 +63,7 @@
                         <p class="post-item__description">{{ review.body }}</p>
 
                         <!-- Résumé du ticket lié -->
-                        <div class="ticket-summary">
+                        <div class="ticket-summary__content">
                             <div class="post-item">
                                 <header class="post-item__header">
                                     <p class="post-item__author">{{ review.ticket.user }} a demandé une critique</p>
@@ -73,7 +73,7 @@
                                 <p class="post-item__description">{{ review.ticket.description }}</p>
                             </div>
 
-                            {% if review.ticket.photo %}
+                            {% if review.ticket.photo  and review.ticket.photo.image %}
                                 <div class="ticket-item__image-container--thumbnail">
                                     <img class="ticket-item__image image-thumbnail" src="{{ review.ticket.photo.image.url }}" alt="Photo du billet">
                                 </div>

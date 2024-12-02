@@ -6,7 +6,7 @@ from PIL import Image
 
 
 class Photo(models.Model):
-    image = models.ImageField()
+    image = models.ImageField(blank=True, null=True)
     uploader = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     date_created = models.DateTimeField(auto_now_add=True)
 
@@ -18,7 +18,8 @@ class Photo(models.Model):
 
     def save(self, *args, **kwargs):
         super().save(*args, **kwargs)
-        self.resize_image()
+        if self.image:  
+            self.resize_image()
 
 
 class Ticket(models.Model):

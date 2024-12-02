@@ -282,6 +282,7 @@ button.navbar__link:hover {
     border-radius: 8px; /* Coins arrondis */
     padding: 10px; /* Espacement interne */
     background-color: #fff; /* Fond blanc */
+    background: linear-gradient(135deg, #F5F5F5, #E0E0E0);
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Ombre pour l'esthétique */
     display: flex;
     flex-direction: column;
@@ -358,7 +359,7 @@ button.navbar__link:hover {
     margin-top: 10px;
 }
 
-.ticket-summary{
+.ticket-summary__content{
     width: 95%;
     height: auto;
     display: flex;
