@@ -150,8 +150,9 @@ button.navbar__link:hover {
 
 /* Bouton Danger */
 .btn-danger {
-    background-color: #FF6B6B; /* Rouge vif */
-    color: black; /* Texte gris clair pour meilleur contraste */
+    background-color: #CC0000;
+    font-weight: bold;
+    color: white; /* Texte gris clair pour meilleur contraste */
     border: none; /* Supprime la bordure */
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Ombre légère */
 }
@@ -280,10 +281,9 @@ button.navbar__link:hover {
 .feed-container__item {
     border: 2px solid #ddd;
     border-radius: 8px; /* Coins arrondis */
-    padding: 10px; /* Espacement interne */
-    background-color: #fff; /* Fond blanc */
-    background: linear-gradient(135deg, #F5F5F5, #E0E0E0);
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Ombre pour l'esthétique */
+    padding: 20px; /* Espacement interne */
+    background-color: #fff;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px;
     display: flex;
     flex-direction: column;
 }
@@ -292,7 +292,6 @@ button.navbar__link:hover {
     display: flex;
     flex-direction: column;
     overflow: hidden;
-
 }
 
 .post-item__header {
@@ -316,6 +315,7 @@ button.navbar__link:hover {
 /* Contenu */
 .post-item__headline {
     font-size: 1.2rem;
+    color: #1e3a5f;
     font-weight: bold;
     margin-bottom: 10px;
 }
@@ -351,12 +351,15 @@ button.navbar__link:hover {
     object-fit: cover; /* Recadre l'image si nécessaire */
 }
 
-
 .post-item__buttons--edit {
     display: flex;
     justify-content: flex-end;
     align-items: center;
     margin-top: 10px;
+}
+
+.ticket-summary{
+    background-color: #f9f9f9;
 }
 
 .ticket-summary__content{
@@ -368,13 +371,14 @@ button.navbar__link:hover {
     padding : 2%;
     border: 2px solid #ddd;
     border-radius: 8px; /* Coins arrondis */
-    background-color: #f9f9f9; /* Fond blanc */
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Ombre pour l'esthéré */
 }
+
 .create-review-container{
     width: 100%;
     box-sizing: border-box;
 }
+
 .rating__stars {
     font-size: 1.5rem; /* Taille des étoiles */
     color: #FFD700; /* Couleur des étoiles (doré) */
@@ -433,6 +437,7 @@ button.navbar__link:hover {
 .follow-user-table tbody{
     padding:0px;
 }
+
 .follow-user-table__form{
    margin: 0;
 }
@@ -441,7 +446,6 @@ button.navbar__link:hover {
     display: flex;
     flex-direction: row;
     justify-content: center;
-
 }
 
 /* Modale cachée par défaut */

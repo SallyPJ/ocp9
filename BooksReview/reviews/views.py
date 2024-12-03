@@ -134,6 +134,9 @@ def create_or_edit_review(request, ticket_id=None, review_id=None):
     # Pré-remplit le formulaire
     review_form = ReviewForm(instance=review)
 
+    is_edit = review_id is not None
+    is_reply_mode = True
+
     if request.method == 'POST':
         review_form = ReviewForm(request.POST, instance=review)
         if review_form.is_valid():
@@ -149,7 +152,8 @@ def create_or_edit_review(request, ticket_id=None, review_id=None):
     context = {
         'review_form': review_form,
         'ticket': ticket,
-        'is_edit': review_id is not None,
+        'is_reply_mode': is_reply_mode,
+        'is_edit': is_edit,
     }
     return render(request, 'reviews/manage-review.html', context)
 

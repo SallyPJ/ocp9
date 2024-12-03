@@ -1,0 +1,23 @@
+{% block content %}
+    <section class="ticket-summary">
+        {% if is_reply_mode or is_edit %}
+            <p class="ticket-summary__title">Vous êtes en train de poster en réponse à :</p>
+        {% endif %}
+            <div class="ticket-summary__content">
+                <div class="post-item">
+                    <header class="post-item__header">
+                        <p class="post-item__author">{{ ticket.user }} a demandé une critique</p>
+                        <time class="post-item__time">{{ ticket.time_created }}</time>
+                    </header>
+                    <h2 class="post-item__headline">{{ ticket.title }}</h2>
+                    <p class="post-item__description">{{ ticket.description }}</p>
+                </div>
+
+                {% if ticket.photo and ticket.photo.image %}
+                <div class="ticket-item__image-container--thumbnail">
+                    <img class="ticket-item__image image-thumbnail" src="{{ ticket.photo.image.url }}" alt="Photo du billet">
+                </div>
+                {% endif %}
+            </div>
+    </section>
+{% endblock content %}

@@ -52,9 +52,9 @@
                         <form method="post" action="" class="follow-user-table__form">
                             {% csrf_token %}
                             {% if follower.blocked %}
-                                <button type="submit" name="block_user" value="{{ follower.id }}" class="btn btn-danger">Débloquer</button>
+                                <button type="submit" name="block_user" value="{{ follower.id }}" class="btn btn-warning">Débloquer</button>
                             {% else %}
-                                <button type="submit" name="block_user" value="{{ follower.id }}" class="btn btn-warning">Bloquer</button>
+                                <button type="submit" name="block_user" value="{{ follower.id }}" class="btn btn-danger">Bloquer</button>
                             {% endif %}
                         </form>
                     </td>

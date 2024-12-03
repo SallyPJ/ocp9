@@ -63,22 +63,9 @@
                         <p class="post-item__description">{{ review.body }}</p>
 
                         <!-- Résumé du ticket lié -->
-                        <div class="ticket-summary__content">
-                            <div class="post-item">
-                                <header class="post-item__header">
-                                    <p class="post-item__author">{{ review.ticket.user }} a demandé une critique</p>
-                                    <time class="post-item__time">{{ review.ticket.time_created }}</time>
-                                </header>
-                                <h2 class="post-item__headline">{{ review.ticket.title }}</h2>
-                                <p class="post-item__description">{{ review.ticket.description }}</p>
-                            </div>
+                        {% include "reviews/ticket-summary.html" with ticket=review.ticket %}
 
-                            {% if review.ticket.photo  and review.ticket.photo.image %}
-                                <div class="ticket-item__image-container--thumbnail">
-                                    <img class="ticket-item__image image-thumbnail" src="{{ review.ticket.photo.image.url }}" alt="Photo du billet">
-                                </div>
-                            {% endif %}
-                        </div>
+
                          {% if show_buttons and review.user == request.user %}
                             <div class="post-item__buttons--edit">
                                 <!-- Bouton pour modifier -->
