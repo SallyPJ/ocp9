@@ -4,7 +4,7 @@
     <h2>{% if is_edit %}Modifier le ticket{% else %}Créer un ticket{% endif %}</h2>
     <form method="post" class="ticket-form" enctype="multipart/form-data">
         {% csrf_token %}
-        <p>Titre :</p>
+        <p>Titre (requis):</p>
         {{ ticket_form.title }}
         <p>Description :</p>
         {{ ticket_form.description }}

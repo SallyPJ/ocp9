@@ -5,7 +5,7 @@ from django.core.exceptions import ValidationError
 
 
 class TicketForm(forms.ModelForm):
-    edit_ticket = forms.BooleanField(widget=forms.HiddenInput, required=False,initial=True)
+    edit_ticket = forms.BooleanField(widget=forms.HiddenInput, required=False, initial=True)
     class Meta:
         model = Ticket
         fields = ['title', 'description']
@@ -79,7 +79,7 @@ class FollowUsersForm(forms.Form):
         label='',
         max_length=150,
         widget=forms.TextInput(attrs={'placeholder': 'Nom d\'utilisateur',
-                                      'class': 'form-control form-control__searchbar' })
+                                      'class': 'form-control form-control__searchbar'})
     )
 
     def __init__(self, *args, **kwargs):

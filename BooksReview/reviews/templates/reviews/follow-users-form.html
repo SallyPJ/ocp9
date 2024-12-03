@@ -8,7 +8,7 @@
         <!-- Formulaire pour suivre un utilisateur -->
         <form method="post" class="follow-user-field">
             {% csrf_token %}
-            {{ form.as_p }}
+             {{ form.followed_username }}
             <button type="submit" name="follow_user" class="btn btn-primary">Envoyer</button>
         </form>
     </section>

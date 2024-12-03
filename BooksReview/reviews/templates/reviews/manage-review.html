@@ -6,9 +6,9 @@
         <h2>{% if is_edit %}Modifier la critique{% else %}Écrire une critique{% endif %}</h2>
         <form method="post" class="ticket-form" enctype="multipart/form-data">
             {% csrf_token %}
-            <p>Titre :</p>
+            <p>Titre (requis):</p>
             {{ review_form.headline }}
-            <p>Note :</p>
+            <p>Note (requis):</p>
             {{ review_form.rating }}
             <p>Description :</p>
             {{ review_form.body }}

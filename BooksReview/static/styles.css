@@ -20,8 +20,8 @@ body {
     margin-left: 20px;
     margin-right: 20px;
     margin-bottom: 10px;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px -50px 36px -28px inset;
 }
-
 .header__title {
     flex: 1;
     color: #fff;
@@ -41,6 +41,7 @@ body {
 .navbar__item {
     display: inline;
     list-style-type: none ;
+
 
 }
 .navbar__link {
@@ -100,7 +101,7 @@ button.navbar__link:hover {
 
 .btn{
     padding: 10px 20px;
-    font-size: 1em;
+    font-size: 1rem;
     border: none;
     cursor: pointer;
     transition: background-color 0.3s ease;
@@ -133,9 +134,10 @@ button.navbar__link:hover {
 /* Bouton Warning */
 .btn-warning {
     background-color: #ffc107; /* Jaune vif */
-    color: black; /* Texte gris clair pour meilleur contraste */
-    border: none; /* Supprime la bordure */
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Ombre légère */
+    color: grey;
+    font-weight: bold;
+    border: none;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 .btn-warning:hover {
@@ -274,7 +276,7 @@ button.navbar__link:hover {
 .feed-container {
     display: flex;
     flex-direction: column;
-    gap: 20px; /* Espacement entre les tickets */
+    gap: 40px; /* Espacement entre les tickets */
     margin: 20px ;
 }
 
@@ -445,7 +447,7 @@ button.navbar__link:hover {
 .follow-user-field{
     display: flex;
     flex-direction: row;
-    justify-content: center;
+    justify-content: space-between;
 }
 
 /* Modale cachée par défaut */
