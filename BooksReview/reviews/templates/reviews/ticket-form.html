@@ -1,0 +1,9 @@
+<section>
+    <h2>{% if is_edit %}Modifier le ticket{% else %}Créer un ticket{% endif %}</h2>
+    <p>Titre (requis):</p>
+    {{ ticket_form.title }}
+    <p>Description :</p>
+    {{ ticket_form.description }}
+    <p>Image :</p>
+    {{ photo_form.as_p }}
+</section>

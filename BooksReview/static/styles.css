@@ -393,7 +393,9 @@ button.navbar__link:hover {
     align-items: flex-start;
     justify-content: flex-start;
     margin-top: 2%;
-    margin : 5%;
+    margin-bottom: 5%;
+    margin-left: 5%;
+    margin-right: 5%;
     padding : 2%;
     border: 2px solid #ddd;
     border-radius: 8px; /* Coins arrondis */

@@ -4,6 +4,7 @@ from django.http import HttpResponseForbidden
 from django.db.models import Q
 from .models import Ticket, Photo, Review, UserFollows
 from .forms import FollowUsersForm, ReviewForm, TicketForm, PhotoForm
+from django.core.paginator import Paginator
 from . import forms
 from itertools import chain
 
@@ -48,8 +49,12 @@ def home(request):
     print("Tickets :", list(tickets))
     print("Reviews :", list(reviews))
     print("Posts combinés :", posts)
+
+    paginator = Paginator(posts, 6)
+    page = request.GET.get('page')
+    page_obj = paginator.get_page(page)
     context = {
-        'posts': posts,
+        'page_obj': page_obj,
         }
     # Transmet les données au template
     return render(request, 'reviews/home.html', context=context)
@@ -233,9 +238,16 @@ def display_user_posts(request):
         key=lambda instance: instance.time_created,
         reverse=True
     )
+    paginator = Paginator(posts, 6)
+    page = request.GET.get('page')
+    page_obj = paginator.get_page(page)
+    context = {
+        'page_obj': page_obj,
+        'show_buttons': True,
+    }
 
     return render(request, 'reviews/posts.html',
-                  {'posts': posts, 'show_buttons': True})
+                  context=context)
 
 @login_required
 def follow_users_form(request):

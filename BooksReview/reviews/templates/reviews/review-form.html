@@ -1,0 +1,9 @@
+    <section >
+        <h2>{% if is_edit %}Modifier la critique{% else %}Écrire une critique{% endif %}</h2>
+        <p>Titre (requis):</p>
+        {{ review_form.headline }}
+        <p>Note (requis):</p>
+        {{ review_form.rating }}
+        <p>Description :</p>
+        {{ review_form.body }}
+    </section>
