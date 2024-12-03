@@ -12,7 +12,7 @@
                             <p class="post-item__author">
                                 {% get_poster_display ticket.user %} demandé une critique
                             </p>
-                            <time class="post-item__time">{{ ticket.time_created }}</time>
+                            <time class="post-item__time">{{ ticket.time_created|date:"H:i, j F Y" }}</time>
                         </header>
                         <h2 class="post-item__headline">{{ ticket.title }}</h2>
                         <p class="post-item__description">{{ ticket.description }}</p>
@@ -53,7 +53,7 @@
                     <section class="post-item">
                         <header class="post-item__header">
                             <p class="post-item__author">{% get_poster_display review.user %} publié une critique</p>
-                            <time class="post-item__time">{{ review.time_created }}</time>
+                            <time class="post-item__time">{{ review.time_created|date:"H:i, j F Y" }}</time>
                         </header>
                         <h3 class="post-item__headline">{{ review.headline }}</h3>
                         <p class="review-item__rating">
