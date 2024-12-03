@@ -1,0 +1,31 @@
+{% load reviews-extras %}
+
+<section class="post-item">
+        <header class="post-item__header">
+            <p class="post-item__author">
+                {% get_poster_display ticket.user %} demandé une critique
+            </p>
+            <time class="post-item__time">{{ ticket.time_created|date:"H:i, j F Y" }}</time>
+        </header>
+        <h2 class="post-item__headline">{{ ticket.title }}</h2>
+        <p class="post-item__description">{{ ticket.description }}</p>
+
+        {% if ticket.photo and ticket.photo.image %}
+            <img class="ticket-item__image" src="{{ ticket.photo.image.url }}" alt="Photo du billet">
+        {% endif %}
+
+        {% if show_buttons and ticket.user == request.user %}
+            <div class="post-item__buttons--edit">
+                <a href="{% url 'edit_ticket' ticket.id %}" class="btn btn-primary">Modifier</a>
+                 <!-- Lien pour ouvrir la modale -->
+                <a href="#confirm-delete-{{ ticket.id }}" class="btn btn-danger">Supprimer</a>
+            </div>
+
+            <!-- Modale de confirmation de suppression de ticket/review -->
+            {% include "reviews/confirm-delete-obj.html" with object_id=ticket.id object_type="ce billet" delete_url="delete-ticket" %}
+        {% endif %}
+
+        {% if not show_buttons and not ticket.user_has_reviewed %}
+            <button type="button" class="btn btn-primary btn-create-review" onclick="window.location.href='{% url 'create-review' ticket.id %}'">Créer une critique</button>
+        {% endif %}
+</section>

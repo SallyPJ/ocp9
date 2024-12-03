@@ -1,0 +1,40 @@
+{% load reviews-extras %}
+<section class="post-item">
+    <header class="post-item__header">
+        <p class="post-item__author">{% get_poster_display review.user %} publié une critique</p>
+        <time class="post-item__time">{{ review.time_created|date:"H:i, j F Y" }}</time>
+    </header>
+    <h3 class="post-item__headline">{{ review.headline }}</h3>
+    <p class="review-item__rating">
+        <span class="rating__label">Note :</span>
+        <span class="rating__stars">{{ review.star_rating }}</span>
+    </p>
+    <p class="post-item__description">{{ review.body }}</p>
+
+    <!-- Résumé du ticket lié -->
+    {% include "reviews/ticket-summary.html" with ticket=review.ticket %}
+
+
+     {% if show_buttons and review.user == request.user %}
+        <div class="post-item__buttons--edit">
+            <!-- Bouton pour modifier -->
+            <a href="{% url 'edit-review' review.id %}" class="btn btn-primary">Modifier</a>
+
+            <!-- Bouton pour ouvrir la modale de suppression -->
+            <a href="#confirm-delete-review-{{ review.id }}" class="btn btn-danger">Supprimer</a>
+        </div>
+
+        <!-- Modale de confirmation pour supprimer la critique -->
+        <div id="confirm-delete-review-{{ review.id }}" class="modal" aria-labelledby="modal-title" role="dialog">
+            <div class="modal-content">
+                <h3>Confirmer la suppression</h3>
+                <p>Êtes-vous sûr de vouloir supprimer cette critique ? Cette action est irréversible.</p>
+                <form method="post" action="{% url 'delete-review' review.id %}">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-danger">Confirmer</button>
+                </form>
+                <a href="#" class="btn btn-secondary">Annuler</a>
+            </div>
+        </div>
+    {% endif %}
+</section>
