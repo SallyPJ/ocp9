@@ -18,10 +18,6 @@ It includes features such as a personalized feed to follow other users' activity
 
    
 ## Installation
-- Go to the project folder
-```bash
-cd ocp9/LitReview
-```
 - Create a virtual environment 
 ```bash
 python -m venv env
@@ -42,6 +38,10 @@ source env/bin/activate
 - Create a file .env at the root of the project and place there the secret key (ask me)
 ```bash
 SECRET_KEY = 'django-insecure-xxxx'
+```
+- Go to the project folder
+```bash
+cd ocp9/LitReview
 ```
 - Run the server
 ```bash
