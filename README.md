@@ -3,11 +3,13 @@
 ## Description
 This project is a Django-based web application designed for readers to create and manage review requests (tickets) and respond to them with detailed critiques. 
 It includes features such as a personalized feed to follow other users' activity and following or blocking users to customize the experience.
+
 ## Dependencies
  - Django 
  - Pillow
  - django-model-utils
  - django-braces
+ - django-extensions
  
 ## Prerequisites
  - Python 3.x installed on your machine
@@ -15,7 +17,6 @@ It includes features such as a personalized feed to follow other users' activity
 ```bash
  git clone https://github.com/SallyPJ/ocp9.git
 ```
-
    
 ## Installation
 - Create a virtual environment 
@@ -49,7 +50,6 @@ cd ocp9/LitReview
 ```
  - Open the following address in your browser : http://127.0.0.1:8000/
 
-   
 ## Usage
 - **User account management**
   - User can create an account.
@@ -76,18 +76,19 @@ cd ocp9/LitReview
 ## Test Users
 To simplify the testing process, the application comes with predefined user accounts. Use these credentials to explore the app:
 
-| Username | Password | Role / Description                  |
-|---------|-------|-------------------------------------|
-| test_user1 | password1 | Regular user, can create tickets and reviews. |
-| test_user2 | password2 | Regular user, follows test_user1.   |
-| admin   | admin | Admin account with full permissions. |
+| Username   | Password  | Role / Description                                       |
+|------------|-----------|----------------------------------------------------------|
+| test_user1 | ocp9user1 | Regular user, follows test_user2 and test_user3          |
+| test_user2 | ocp9user2 | Regular user, follows test_user1, has blocked test_user3 |
+| test_user2 | ocp9user3 | Regular user, follows test_user1 and test_user2          |
+| admin      | admin     | Admin account with full permissions, follows test_user1  |
 How to Access
-Go to the login page: http://127.0.0.1:8000/login/.
+
+Go to the login page: http://127.0.0.1:8000/ or http://127.0.0.1:8000/admin (admin account only).
 Use one of the above credentials to log in.
 Explore the features based on the user role.
-## Screenshots
+
 ## Data relationships
-![myapp_models.png](LitReview%2Fmyapp_models.png)
-![myapp_models.png](LitReview%2Fmyapp_models.png)
+![myapp_models.png](myapp_models.png)
 ## License
 This project is licensed under the MIT License. See the LICENSE file for more information.
