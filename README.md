@@ -18,13 +18,23 @@ It includes features such as a personalized feed to follow other users' activity
 
    
 ## Installation
- - Go to the project folder
-
- - Create a virtual environment 
+- Go to the project folder
+```bash
+ cd LitReview
+```
+- Create a virtual environment 
 ```bash
  python -m venv env
 ```
- - Activate the virtual environment
+- Activate the virtual environment
+  - Windows(Powershell)
+```bash
+source env\scripts\activate
+```
+  -Linux/Mac
+```bash
+source env/bin/activate
+```
  - Install dependencies
 ```bash
  pip install -r requirements.txt
@@ -32,7 +42,7 @@ It includes features such as a personalized feed to follow other users' activity
 ```bash
  python manage.py runserver
 ```
- - Open t http://127.0.0.1:8000/
+ - Open the following address in your browser : http://127.0.0.1:8000/
 
    
 ## Usage
@@ -72,7 +82,7 @@ Use one of the above credentials to log in.
 Explore the features based on the user role.
 ## Screenshots
 ## Data relationships
-![img.png](img.png)
+![myapp_models.png](LitReview%2Fmyapp_models.png)
 
 ## License
 This project is licensed under the MIT License. See the LICENSE file for more information.
