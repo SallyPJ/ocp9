@@ -20,11 +20,11 @@ It includes features such as a personalized feed to follow other users' activity
 ## Installation
 - Go to the project folder
 ```bash
- cd LitReview
+cd ocp9/LitReview
 ```
 - Create a virtual environment 
 ```bash
- python -m venv env
+python -m venv env
 ```
 - Activate the virtual environment
   - Windows(Powershell)
