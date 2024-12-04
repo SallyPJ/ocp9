@@ -39,6 +39,11 @@ source env/bin/activate
 ```bash
  pip install -r requirements.txt
 ```
+- Create a file .env at the root of the project and place there the secret key (ask me)
+```bash
+SECRET_KEY = 'django-insecure-xxxx'
+```
+- Run the server
 ```bash
  python manage.py runserver
 ```
