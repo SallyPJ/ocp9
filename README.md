@@ -1,4 +1,4 @@
-# Project 9 : LitReviews
+# Project 9 : LitReview
 
 ## Description
 This project is a Django-based web application designed for readers to create and manage review requests (tickets) and respond to them with detailed critiques. 
@@ -31,7 +31,7 @@ python -m venv env
 ```bash
 source env\scripts\activate
 ```
-  -Linux/Mac
+  - Linux/Mac
 ```bash
 source env/bin/activate
 ```
@@ -88,6 +88,6 @@ Explore the features based on the user role.
 ## Screenshots
 ## Data relationships
 ![myapp_models.png](LitReview%2Fmyapp_models.png)
-
+![myapp_models.png](LitReview%2Fmyapp_models.png)
 ## License
 This project is licensed under the MIT License. See the LICENSE file for more information.
