@@ -481,3 +481,13 @@ button.navbar__link:hover {
     max-width: 400px;
     width: 90%;
 }
+
+.pagination-container{
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+    gap: 10px;
+    font-size: 1.2em;
+    font-family: Helvetica, sans-serif;
+}

@@ -2,7 +2,7 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponseForbidden
 from django.db.models import Q
-from .models import Ticket, Photo, Review, UserFollows
+from .models import Ticket, Review, UserFollows
 from .forms import FollowUsersForm, ReviewForm, TicketForm, PhotoForm
 from django.core.paginator import Paginator
 from . import forms
@@ -13,11 +13,12 @@ from itertools import chain
 @login_required
 def home(request):
     # Liste des utilisateurs bloqués par l'utilisateur connecté
-    blocked_users = UserFollows.objects.filter(user=request.user, blocked=True).values_list('followed_user', flat=True)
+    blocked_users = (UserFollows.objects.filter(user=request.user, blocked=True)
+                     .values_list('followed_user', flat=True))
 
     # Liste des utilisateurs ayant bloqué l'utilisateur connecté
-    blocked_by_users = UserFollows.objects.filter(followed_user=request.user, blocked=True).values_list('user',
-                                                                                                        flat=True)
+    blocked_by_users = (UserFollows.objects.filter(followed_user=request.user, blocked=True)
+                        .values_list('user',flat=True))
 
     # Liste combinée des utilisateurs bloqués dans les deux sens
     blocked_combined = set(blocked_users).union(set(blocked_by_users))
@@ -25,7 +26,6 @@ def home(request):
     followed_users = request.user.following.values_list('followed_user', flat=True)
 
     # Liste des utilisateurs qui sont suivis par l'utilisateur connecté
-    # Récupère tous les tickets avec leurs critiques associées
     tickets = Ticket.objects.filter(
         (Q(user__in=followed_users) | Q(user=request.user))
         & ~Q(user__in=blocked_combined)  # Exclure les utilisateurs bloqués
@@ -33,7 +33,8 @@ def home(request):
 
     # Ajouter une annotation pour vérifier si l'utilisateur a écrit une critique sur chaque ticket
     for ticket in tickets:
-        ticket.user_has_reviewed = ticket.review_set.filter(user=request.user).exists()
+        ticket.user_has_reviewed = (ticket.review_set.filter
+                                    (user=request.user).exists())
 
     # Récupère toutes les critiques avec leur ticket lié
     reviews = Review.objects.filter(
@@ -56,21 +57,21 @@ def home(request):
     context = {
         'page_obj': page_obj,
         }
-    # Transmet les données au template
+
     return render(request, 'reviews/home.html', context=context)
 
 
 @login_required
 def create_or_edit_ticket(request, ticket_id=None):
-    # Si `ticket_id` est fourni, on édite un ticket existant, sinon on crée un nouveau ticket
     if ticket_id:
         ticket = get_object_or_404(Ticket, id=ticket_id)
         if ticket.user != request.user:
-            return HttpResponseForbidden("Vous n'êtes pas autorisé à modifier ce billet.")
+            return HttpResponseForbidden("Vous n'êtes pas autorisé"
+                                         " à modifier ce billet.")
     else:
         ticket = Ticket(user=request.user)
 
-    # Initialisez les formulaires
+    # Initialise les formulaires
     ticket_form = TicketForm(instance=ticket)
     photo_form = PhotoForm(instance=ticket.photo)
 
@@ -79,7 +80,6 @@ def create_or_edit_ticket(request, ticket_id=None):
         photo_form = PhotoForm(request.POST, request.FILES, instance=ticket.photo)
 
         if ticket_form.is_valid() and photo_form.is_valid():
-            # Sauvegarder le ticket
             ticket = ticket_form.save(commit=False)
 
             # Sauvegarder ou mettre à jour l'image
@@ -98,7 +98,7 @@ def create_or_edit_ticket(request, ticket_id=None):
     context = {
         'ticket_form': ticket_form,
         'photo_form': photo_form,
-        'is_edit': ticket_id is not None,  # Indique si c'est une édition
+        'is_edit': ticket_id is not None,
     }
     return render(request, 'reviews/manage-ticket.html', context)
 
@@ -108,15 +108,16 @@ def create_or_edit_ticket(request, ticket_id=None):
 def delete_ticket(request, ticket_id):
     ticket = get_object_or_404(Ticket, id=ticket_id)
 
-    # Vérifie que l'utilisateur est le propriétaire du ticket
     if ticket.user != request.user:
-        return HttpResponseForbidden("Vous n'êtes pas autorisé à supprimer ce billet.")
+        return HttpResponseForbidden("Vous n'êtes pas autorisé "
+                                     "à supprimer ce billet.")
 
     if request.method == 'POST':
         ticket.delete()
         return redirect('posts')  # Redirige après la suppression
 
-    return render(request, 'reviews/confirm-delete.html', {'ticket': ticket})
+    return render(request, 'reviews/confirm-delete.html',
+                  {'ticket': ticket})
 
 
 @login_required
@@ -131,7 +132,8 @@ def create_or_edit_review(request, ticket_id=None, review_id=None):
     if review_id:
         review = get_object_or_404(Review, id=review_id)
         if review.user != request.user:
-            return HttpResponseForbidden("Vous n'êtes pas autorisé à modifier cette critique.")
+            return HttpResponseForbidden("Vous n'êtes pas autorisé"
+                                         " à modifier cette critique.")
         ticket = review.ticket
     else:
         review = Review(ticket=ticket, user=request.user)
@@ -147,7 +149,7 @@ def create_or_edit_review(request, ticket_id=None, review_id=None):
         if review_form.is_valid():
             review = review_form.save(commit=False)
             if not review_id:
-                review.ticket = ticket  # Associe le ticket lors de la création
+                review.ticket = ticket  # Associe le ticket lors de la création de la review
             review.save()
             if review_id:  # Modification
                 return redirect('posts')
