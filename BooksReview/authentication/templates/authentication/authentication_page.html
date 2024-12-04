@@ -11,6 +11,7 @@
             <h2 class="login-block__title">Connectez-vous</h2>
             <form method="post" class="login-form">
             {% csrf_token %}
+
             {{ form.as_p }}
             <button type="submit" class="btn btn-primary">Se connecter</button>
             </form>

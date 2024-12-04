@@ -4,7 +4,6 @@ from django.conf import settings
 
 from . import forms
 
-
 def logout_user(request):
     logout(request)
     return redirect('login')
