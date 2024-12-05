@@ -4,9 +4,11 @@ from django.conf import settings
 
 from . import forms
 
+
 def logout_user(request):
     logout(request)
     return redirect('login')
+
 
 def signup_page(request):
     form = forms.SignupForm()

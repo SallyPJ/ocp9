@@ -10,7 +10,6 @@ from . import forms
 from itertools import chain
 
 
-
 @login_required
 def home(request):
     # Liste des utilisateurs bloqués par l'utilisateur connecté
@@ -19,7 +18,7 @@ def home(request):
 
     # Liste des utilisateurs ayant bloqué l'utilisateur connecté
     blocked_by_users = (UserFollows.objects.filter(followed_user=request.user, blocked=True)
-                        .values_list('user',flat=True))
+                        .values_list('user', flat=True))
 
     # Liste combinée des utilisateurs bloqués dans les deux sens
     blocked_combined = set(blocked_users).union(set(blocked_by_users))
@@ -58,7 +57,6 @@ def home(request):
     context = {
         'page_obj': page_obj,
         }
-
     return render(request, 'reviews/home.html', context=context)
 
 
@@ -102,7 +100,6 @@ def create_or_edit_ticket(request, ticket_id=None):
         'is_edit': ticket_id is not None,
     }
     return render(request, 'reviews/manage-ticket.html', context)
-
 
 
 @login_required()
@@ -180,6 +177,7 @@ def delete_review(request, review_id):
     context = {'review': review}
     return render(request, 'reviews/confirm-delete-review.html', context)
 
+
 @login_required
 def create_ticket_and_review(request):
     ticket_form = forms.TicketForm()
@@ -226,7 +224,6 @@ def create_ticket_and_review(request):
     return render(request, 'reviews/create-ticket-and-review.html', context=context)
 
 
-
 @login_required()
 def display_user_posts(request):
     # Récupérer les tickets de l'utilisateur
@@ -248,9 +245,5 @@ def display_user_posts(request):
         'page_obj': page_obj,
         'show_buttons': True,
     }
-
     return render(request, 'reviews/posts.html',
                   context=context)
-
-
-

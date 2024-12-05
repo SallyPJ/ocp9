@@ -1,9 +1,7 @@
 from django.contrib import admin
 
-from reviews.models import Ticket, Review
-from social.models import UserFollows
+from .models import Ticket, Review
+
 
 admin.site.register(Ticket)
 admin.site.register(Review)
-admin.site.register(UserFollows)
-

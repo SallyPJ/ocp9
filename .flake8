@@ -1,0 +1,5 @@
+[flake8]
+exclude =
+    migrations,  # Exclure les migrations Django
+    static  # Exclure les fichiers statiques
+max-line-length = 100

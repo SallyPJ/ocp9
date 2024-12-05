@@ -15,7 +15,8 @@ class SignupForm(UserCreationForm):
     )
     password2 = forms.CharField(
         label='',
-        widget=forms.PasswordInput(attrs={'placeholder': 'Confirmez le mot de passe', 'class': 'form-control'})
+        widget=forms.PasswordInput(attrs={'placeholder': 'Confirmez le mot de passe',
+                                          'class': 'form-control'})
     )
 
     class Meta(UserCreationForm.Meta):
@@ -30,9 +31,11 @@ class SignupForm(UserCreationForm):
 class CustomAuthenticationForm(AuthenticationForm):
     username = forms.CharField(
         label='',
-        widget=forms.TextInput(attrs={'placeholder': 'Nom d’utilisateur', 'class': 'form-control form-control__larger'})
+        widget=forms.TextInput(attrs={'placeholder': 'Nom d’utilisateur',
+                                      'class': 'form-control form-control__larger'})
     )
     password = forms.CharField(
         label='',
-        widget=forms.PasswordInput(attrs={'placeholder': 'Mot de passe', 'class': 'form-control form-control__larger'})
+        widget=forms.PasswordInput(attrs={'placeholder': 'Mot de passe',
+                                          'class': 'form-control form-control__larger'})
     )
