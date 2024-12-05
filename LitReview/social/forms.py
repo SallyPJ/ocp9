@@ -7,7 +7,8 @@ class FollowUsersForm(forms.Form):
     followed_username = forms.CharField(
         label='',
         max_length=150,
-        widget=forms.TextInput(attrs={'placeholder': 'Nom d\'utilisateur',
+        widget=forms.TextInput(attrs={'placeholder': 'Nom de l\'utilisateur',
+                                      'aria-label': 'Nom de l\'utilisateur',
                                       'class': 'form-control form-control__searchbar'})
     )
 

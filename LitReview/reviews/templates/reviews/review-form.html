@@ -2,8 +2,10 @@
         <h2>{% if is_edit %}Modifier la critique{% else %}Écrire une critique{% endif %}</h2>
         <p>Titre (requis):</p>
         {{ review_form.headline }}
-        <p>Note (requis):</p>
-        {{ review_form.rating }}
+            <fieldset class="rating__fieldset">
+                <legend class>Note (requis):</legend>
+                {{ review_form.rating }}
+            </fieldset>
         <p>Description :</p>
         {{ review_form.body }}
     </section>

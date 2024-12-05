@@ -7,7 +7,7 @@
             </p>
             <time class="post-item__time">{{ ticket.time_created|date:"H:i, j F Y" }}</time>
         </header>
-        <h2 class="post-item__headline">{{ ticket.title }}</h2>
+        <h3 class="post-item__headline">{{ ticket.title }}</h3>
         <p class="post-item__description">{{ ticket.description }}</p>
 
         {% if ticket.photo and ticket.photo.image %}

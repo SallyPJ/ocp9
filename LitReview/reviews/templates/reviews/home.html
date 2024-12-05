@@ -4,12 +4,14 @@
 
 
 {% block content %}
-    <main class="feed-main-content">
+    <div class="feed-main-content">
         <section class="tickets__creation">
-            <button type="button" class="btn btn-primary" onclick="window.location.href='{% url 'create-ticket' %}'">Demander une critique</button>
-            <button type="button" class="btn btn-primary" onclick="window.location.href='{% url 'create-ticket-and-review' %}'">Créer une critique</button>
+            <button type="button" class="btn btn-primary" onclick="window.location.href='{% url 'create-ticket' %}'"
+             aria-label="Demander une critique">Demander une critique</button>
+            <button type="button" class="btn btn-primary" onclick="window.location.href='{% url 'create-ticket-and-review' %}'"
+             aria-label="Créer une critique">Créer une critique</button>
         </section>
         <!-- Affichage des tickets -->
         {% include "reviews/display-feed.html" %}
-    </main>
+    </div>
 {% endblock content %}

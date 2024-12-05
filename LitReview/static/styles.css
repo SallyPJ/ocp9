@@ -1,6 +1,6 @@
 body {
     background-color :#f5efe6;
-    font-family: Helvetica, sans-serif;
+    font-family: 'Helvetica','Arial', sans-serif;
     color: #2c2c2c;
     width: auto;
     height: auto;
@@ -25,7 +25,7 @@ body {
 .header__title {
     flex: 1;
     color: #fff;
-    font-family: Helvetica, sans-serif;
+    font-family:'Helvetica', 'Arial', sans-serif;
     font-size: 1.5em;
     padding: 10px;
     text-align: center;
@@ -78,7 +78,7 @@ button.navbar__link:hover {
 }
 
 .signup-block__title, .login-block__title {
-    font-family: Helvetica, sans-serif;
+    font-family: 'Helvetica', 'Arial', sans-serif;
     font-size: 1.5em;
     padding: 10px;
     text-align: center;
@@ -88,7 +88,7 @@ button.navbar__link:hover {
 .authentication_container{
     display: flex;
     justify-content: space-between;
-    font-family: Helvetica, sans-serif;
+    font-family: 'Helvetica', 'Arial', sans-serif;
     padding: 20px;
     gap: 20px; /* Espace entre les sections */
 }
@@ -108,11 +108,12 @@ button.navbar__link:hover {
     display: inline-block;
     text-decoration: none;
     border-radius: 8px;
-    color: #faf0e6;
+    color: black;
     margin: 10px;
 }
 .btn-primary{
-    background-color: #2E8B57;
+    background-color: green;
+    color: white;
     font-weight: bold;
 }
 
@@ -123,6 +124,7 @@ button.navbar__link:hover {
 
 .btn-secondary{gba(0, 0, 0, 0.2);
     background-color: #6C757D;
+    color: white;
     font-weight: bold
 }
 
@@ -134,7 +136,6 @@ button.navbar__link:hover {
 /* Bouton Warning */
 .btn-warning {
     background-color: #ffc107; /* Jaune vif */
-    color: grey;
     font-weight: bold;
     border: none;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -152,11 +153,10 @@ button.navbar__link:hover {
 
 /* Bouton Danger */
 .btn-danger {
-    background-color: #CC0000;
+    background-color: coral;
     font-weight: bold;
-    color: white; /* Texte gris clair pour meilleur contraste */
-    border: none; /* Supprime la bordure */
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Ombre légère */
+    border: none;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 .btn-danger:hover {
@@ -188,7 +188,7 @@ button.navbar__link:hover {
 
 }
 .form-control{
-    font-family: Helvetica, sans-serif;
+    font-family: 'Helvetica', 'Arial',sans-serif;
     font-size: 1.2em; /* Agrandit le texte à l'intérieur du champ */
     padding: 10px; /* Ajoute de l'espace autour du texte */
     height: 50px; /* Définit une hauteur plus grande pour le champ */
@@ -383,8 +383,12 @@ button.navbar__link:hover {
 
 .rating__stars {
     font-size: 1.5rem; /* Taille des étoiles */
-    color: #FFD700; /* Couleur des étoiles (doré) */
+    color: black;
     letter-spacing: 2px; /* Espacement entre les étoiles */
+}
+.rating__fieldset {
+    margin-top: 15px;
+
 }
 
 .page-layout {
@@ -489,9 +493,36 @@ button.navbar__link:hover {
     margin-top: 20px;
     gap: 10px;
     font-size: 1.2em;
-    font-family: Helvetica, sans-serif;
+    font-family: 'Helvetica','Arial' sans-serif;
 }
 
 .errorlist{
 
+}
+
+@media (max-width: 768px) {
+    .feed-main-content {
+        padding-left : 2%;
+        padding-right : 2%;
+        margin-top : 2%;
+}
+
+    .header {
+        flex-direction: column; /* Passe en colonne */
+        align-items: center; /* Centre les éléments */
+    }
+
+    .header__title {
+        font-size: 1.5rem; /* Réduit la taille du titre */
+        margin-bottom: 1rem; /* Ajoute un espace sous le titre */
+        text-align: center;
+    }
+
+    .navbar__menu {
+        flex-direction: column; /* Passe les liens en colonne */
+        align-items: center; /* Centre les liens */
+        margin:0;
+        padding:0;
+    }
+}
 }

@@ -16,9 +16,13 @@ class TicketForm(forms.ModelForm):
         fieldsets = ()
         widgets = {
             'title': forms.TextInput(attrs={'class': 'form-control ',
-                                            'placeholder': 'Entrez le titre'}),
+                                            'placeholder': 'Entrez le titre',
+                                            'aria-label': 'Titre du ticket',
+                                            }),
             'description': forms.Textarea(attrs={'class': 'form-control form-control__description',
-                                                 'placeholder': 'Entrez la description'}),
+                                                 'placeholder': 'Entrez la description',
+                                                 'aria-label': 'Description du ticket',
+                                                 }),
         }
 
 
@@ -52,9 +56,11 @@ class ReviewForm(forms.ModelForm):
         }
         widgets = {
             'headline': forms.TextInput(attrs={'class': 'form-control ',
+                                               'aria-label': 'Titre de la critique',
                                                'placeholder': 'Entrez le titre'}),
             'body': forms.Textarea(attrs={'class': 'form-control form-control__description',
-                                                   'placeholder': 'Entrez la description'}),
+                                          'aria-label': 'Description de la critique',
+                                          'placeholder': 'Entrez la description'}),
             'rating': forms.RadioSelect(choices=[
                 ('0', '0'),
                 ('1', '1'),

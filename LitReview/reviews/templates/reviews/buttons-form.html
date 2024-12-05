@@ -2,5 +2,7 @@
     <button type="submit" class="btn btn-primary btn-form">
         {% if is_edit %}Sauvegarder{% else %}Publier{% endif %}
     </button>
-    <button class="btn btn-secondary btn-form" onclick="history.back()">Retour</button>
+    <button class="btn btn-secondary btn-form"
+            aria-label="Revenir à la page précédente"
+            onclick="history.back()">Retour</button>
 </div>
