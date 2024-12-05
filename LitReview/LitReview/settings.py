@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'django.contrib.admindocs',
     'authentication',
     'reviews',
+    'social',
 ]
 
 MIDDLEWARE = [

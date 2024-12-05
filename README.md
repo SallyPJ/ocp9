@@ -4,13 +4,7 @@
 This project is a Django-based web application designed for readers to create and manage review requests (tickets) and respond to them with detailed critiques. 
 It includes features such as a personalized feed to follow other users' activity and following or blocking users to customize the experience.
 
-## Dependencies
- - Django 
- - Pillow
- - django-model-utils
- - django-braces
- - django-extensions
- 
+
 ## Prerequisites
  - Python 3.x installed on your machine
  - Clone this repository :
@@ -25,13 +19,13 @@ python -m venv env
 ```
 - Activate the virtual environment
   - Windows(Powershell)
-```bash
-source env\scripts\activate
-```
-  - Linux/Mac
-```bash
-source env/bin/activate
-```
+  ```bash
+  source env\scripts\activate
+  ```
+   - Linux/Mac
+  ```bash
+  source env/bin/activate
+  ```
  - Install dependencies
 ```bash
  pip install -r requirements.txt
@@ -74,7 +68,8 @@ cd ocp9/LitReview
   - The feed display 6 posts per page.
 
 ## Test Users
-To simplify the testing process, the application comes with predefined user accounts. Use these credentials to explore the app:
+To simplify the testing process, the application comes with predefined user accounts.   
+Use these credentials to explore the app:
 
 | Username   | Password  | Role / Description                                       |
 |------------|-----------|----------------------------------------------------------|
@@ -82,11 +77,11 @@ To simplify the testing process, the application comes with predefined user acco
 | test_user2 | ocp9user2 | Regular user, follows test_user1, has blocked test_user3 |
 | test_user2 | ocp9user3 | Regular user, follows test_user1 and test_user2          |
 | admin      | admin     | Admin account with full permissions, follows test_user1  |
-How to Access
+### How to Access
 
-Go to the login page: http://127.0.0.1:8000/ or http://127.0.0.1:8000/admin (admin account only).
-Use one of the above credentials to log in.
-Explore the features based on the user role.
+- Go to the login page: http://127.0.0.1:8000/ or http://127.0.0.1:8000/admin (admin account only).
+- Use one of the above credentials to log in.
+- Explore the features based on the user role.
 
 ## Data relationships
 ![myapp_models.png](myapp_models.png)
