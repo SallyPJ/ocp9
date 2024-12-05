@@ -26,7 +26,6 @@ import reviews.views
 import social.views
 
 
-
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', LoginView.as_view(
@@ -50,8 +49,10 @@ urlpatterns = [
     path('reviews/<int:review_id>/edit/', reviews.views.create_or_edit_review, name='edit-review'),
     path('reviews/<int:review_id>/delete/', reviews.views.delete_review, name='delete-review'),
     path('delete-ticket/<int:ticket_id>/', reviews.views.delete_ticket, name='delete-ticket'),
-    path('create-review/<int:ticket_id>/', reviews.views.create_or_edit_review, name='create-review'),
-    path('create-ticket-and-review/', reviews.views.create_ticket_and_review, name='create-ticket-and-review'),
+    path('create-review/<int:ticket_id>/', reviews.views.create_or_edit_review,
+         name='create-review'),
+    path('create-ticket-and-review/', reviews.views.create_ticket_and_review,
+         name='create-ticket-and-review'),
     path('reviews/posts.html/', reviews.views.display_user_posts, name='posts'),
     path('follow-users-form/', social.views.follow_users_form, name='follow-users-form'),
 

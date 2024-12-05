@@ -3,7 +3,9 @@ from .models import Ticket, Photo, Review
 
 
 class TicketForm(forms.ModelForm):
-    edit_ticket = forms.BooleanField(widget=forms.HiddenInput, required=False, initial=True)
+    edit_ticket = forms.BooleanField(widget=forms.HiddenInput,
+                                     required=False, initial=True)
+
     class Meta:
         model = Ticket
         fields = ['title', 'description']
@@ -19,6 +21,7 @@ class TicketForm(forms.ModelForm):
                                                  'placeholder': 'Entrez la description'}),
         }
 
+
 class PhotoForm(forms.ModelForm):
     class Meta:
         model = Photo
@@ -30,15 +33,16 @@ class PhotoForm(forms.ModelForm):
             'image': forms.ClearableFileInput(attrs={
                 'class': 'form-control',
                 'aria-label': 'Téléchargez une image',
-
                                                      }),
         }
+
 
 class DeleteTicketForm(forms.Form):
     delete_ticket = forms.BooleanField(widget=forms.HiddenInput, initial=True)
 
 
 class ReviewForm(forms.ModelForm):
+
     class Meta:
         model = Review
         fields = ['rating', 'headline', 'body']
@@ -48,9 +52,9 @@ class ReviewForm(forms.ModelForm):
         }
         widgets = {
             'headline': forms.TextInput(attrs={'class': 'form-control ',
-                                            'placeholder': 'Entrez le titre'}),
+                                               'placeholder': 'Entrez le titre'}),
             'body': forms.Textarea(attrs={'class': 'form-control form-control__description',
-                                                 'placeholder': 'Entrez la description'}),
+                                                   'placeholder': 'Entrez la description'}),
             'rating': forms.RadioSelect(choices=[
                 ('0', '0'),
                 ('1', '1'),
@@ -64,5 +68,3 @@ class ReviewForm(forms.ModelForm):
                 },
             ),
         }
-
-

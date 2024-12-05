@@ -1,7 +1,6 @@
 from django.core.validators import MinValueValidator, MaxValueValidator
 from django.conf import settings
 from django.db import models
-
 from PIL import Image
 
 
@@ -11,6 +10,7 @@ class Photo(models.Model):
     date_created = models.DateTimeField(auto_now_add=True)
 
     IMAGE_MAX_SIZE = (400, 400)
+
     def resize_image(self):
         image = Image.open(self.image)
         image.thumbnail(self.IMAGE_MAX_SIZE)
@@ -46,12 +46,10 @@ class Review(models.Model):
     user = models.ForeignKey(
         to=settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     time_created = models.DateTimeField(auto_now_add=True)
+
     class Meta:
         ordering = ['-time_created']
 
     def star_rating(self):
         """Retourne une chaîne d'étoiles basée sur la note"""
         return "★" * self.rating + "☆" * (5 - self.rating)
-
-
-
