@@ -500,6 +500,37 @@ button.navbar__link:hover {
 
 }
 
+.alert-success {
+    background-color: #d4edda;
+    color: #155724;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+}
+
+.alert-error {
+    background-color: #f8d7da;
+    color: #721c24;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+}
+.alert-warning {
+    background-color: #fff3cd;
+    color: #856404;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+}
+
+.alert-info {
+    background-color: #d1ecf1;
+    color: #0c5460;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+}
+
 @media (max-width: 768px) {
     .feed-main-content {
         padding-left : 2%;

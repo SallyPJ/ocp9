@@ -2,6 +2,14 @@
 
 {% block content %}
 <div class ="page-layout">
+     <!-- Affichage des messages -->
+    {% if messages %}
+        {% for message in messages %}
+            <div class="alert alert-{{ message.tags }}">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endif %}
     <section>
         <h2>Suivre d'autres utilisateurs</h2>
 
