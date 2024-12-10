@@ -15,24 +15,25 @@ def follow_users_form(request):
             form = FollowUsersForm(request.POST, user=request.user)
 
             if form.is_valid():
-                followed_user = form.cleaned_data['followed_username']
-                try:
-                    followed_user = User.objects.get(username=followed_user)
-                    if followed_user != request.user:  # Empêche de se suivre soi-même
-                        follow, created = UserFollows.objects.get_or_create(
-                            user=request.user,
-                            followed_user=followed_user
-                        )
-                        if created:
-                            messages.success(request, f"Vous suivez maintenant {followed_user.username}.")
-                        else:
-                            messages.warning(request, f"Vous suivez déjà {followed_user.username}.")
-                    else:
-                        messages.error(request, "Vous ne pouvez pas vous suivre vous-même.")
-                except User.DoesNotExist:
-                    messages.error(request, f"L'utilisateur '{followed_user}' n'existe pas.")
+                followed_username = form.cleaned_data['followed_username']
+
+                # Récupère l'utilisateur correspondant au nom d'utilisateur validé
+                followed_user = User.objects.get(username=followed_username)
+
+                # Crée la relation de suivi ou récupère la relation existante
+                follow, created = UserFollows.objects.get_or_create(
+                    user=request.user,
+                    followed_user=followed_user
+                )
+
+                if created:
+                    messages.success(request, f"Vous suivez maintenant {followed_username}.")
+                else:
+                    messages.warning(request, f"Vous suivez déjà {followed_username}.")
             else:
-                messages.error(request, "Formulaire non valide. Veuillez vérifier votre saisie.")
+                for field, errors in form.errors.items():
+                    for error in errors:
+                        messages.error(request, f"Erreur : {error}")
 
         elif 'unfollow_user' in request.POST:  # Se désabonner d'un utilisateur
             follow_id = request.POST.get('unfollow_user')
