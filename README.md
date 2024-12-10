@@ -1,8 +1,8 @@
 # Project 9 : LitReview
 
 ## Description
-This project is a Django-based web application designed for readers to create and manage review requests (tickets) and respond to them with detailed critiques. 
-It includes features such as a personalized feed to follow other users' activity and following or blocking users to customize the experience.
+LitReview is a Django-based web application designed to allow users to write, publish, and manage reviews of books and articles.   
+It also supports social features such as following other users and interacting with reviews.
 
 
 ## Prerequisites
@@ -83,7 +83,17 @@ Use these credentials to explore the app:
 - Use one of the above credentials to log in.
 - Explore the features based on the user role.
 
-## Data relationships
+## Technical architecture
+
+### Apps
+
+- authentication: Handles user authentication and registration.
+
+- reviews: Manages review creation, updates, and deletion.
+
+- social: Implements social interactions such as following/unfollowing users.
+
+### Data relationships
 ![myapp_models.png](myapp_models.png)
 ## License
 This project is licensed under the MIT License. See the LICENSE file for more information.

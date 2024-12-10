@@ -6,7 +6,7 @@
     <form method="post" class="ticket-form" enctype="multipart/form-data">
         {% csrf_token %}
         {% include 'reviews/review-form.html' %}
-        {% include 'reviews/buttons-form.html' %}
+        {% include 'reviews/buttons_form.html' %}
     </form>
 </section>
 {% endblock content %}

@@ -7,12 +7,12 @@
                 {% if obj.title %}
                     <!-- C'est un Ticket -->
                     {% with obj as ticket %}
-                        {% include "reviews/ticket-item.html" %}
+                        {% include "reviews/ticket_item.html" %}
                     {% endwith %}
                 {% elif obj.headline %}
                     <!-- C'est une Review -->
                     {% with obj as review %}
-                        {% include "reviews/review-item.html" %}
+                        {% include "reviews/review_item.html" %}
                     {% endwith %}
                 {% else %}
                     <!-- Type inconnu -->

@@ -42,7 +42,7 @@ urlpatterns = [
         template_name='authentication/password_change_done.html'),
          name='password_change_done'
          ),
-    path('signup/', authentication.views.signup_page, name='signup'),
+    path('signup/', authentication.views.signup_user, name='signup'),
     path('home/', reviews.views.home, name='home'),
     path('reviews/create-ticket/', reviews.views.create_or_edit_ticket, name='create-ticket'),
     path('reviews/<int:ticket_id>/edit', reviews.views.create_or_edit_ticket, name='edit_ticket'),
