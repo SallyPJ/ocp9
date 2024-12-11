@@ -1,9 +1,11 @@
 {% extends 'base.html' %}
 {% block content %}
+
 <section class="page-layout">
+    {% include 'reviews/ticket_summary.html' %}
     <form method="post" class="ticket-form" enctype="multipart/form-data">
         {% csrf_token %}
-        {% include 'reviews/ticket-form.html' %}
+        {% include 'reviews/review_form.html' %}
         {% include 'reviews/buttons_form.html' %}
     </form>
 </section>

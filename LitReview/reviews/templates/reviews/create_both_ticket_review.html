@@ -5,13 +5,13 @@
         {% csrf_token %}
 
         <!-- Inclure le formulaire de ticket -->
-        {% include 'reviews/ticket-form.html' %}
+        {% include 'reviews/ticket_form.html' %}
 
         <!-- Inclure le formulaire de critique -->
-        {% include 'reviews/review-form.html' %}
+        {% include 'reviews/review_form.html' %}
 
         <!-- Inclure les boutons de validation -->
-        {% include 'reviews/buttons-form.html' %}
+        {% include 'reviews/buttons_form.html' %}
     </form>
 </div>
 {% endblock content %}

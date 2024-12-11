@@ -22,7 +22,7 @@ def follow_users_form(request):
             request (HttpRequest): The incoming HTTP request.
 
         Returns:
-            HttpResponse: Renders the 'follow-users-form.html' template
+            HttpResponse: Renders the 'follow_user_page.html' template
                           or redirects after processing POST requests.
 
         Workflow:
@@ -33,7 +33,8 @@ def follow_users_form(request):
                 - Handles three actions based on POST data:
                     1. **Follow User**: Creates a follow relationship with another user.
                     2. **Unfollow User**: Removes an existing follow relationship.
-                    3. **Block/Unblock User**: Toggles the block status of an existing follow relationship.
+                    3. **Block/Unblock User**: Toggles the block status of an
+                    existing follow relationship.
         """
     if request.method == 'POST':
         if 'follow_user' in request.POST:
@@ -79,7 +80,7 @@ def follow_users_form(request):
     followed_users = UserFollows.objects.filter(user=request.user)  # Utilisateurs suivis
     followers = UserFollows.objects.filter(followed_user=request.user)  # Abonnés
 
-    return render(request, 'social/follow-users-form.html', {
+    return render(request, 'social/follow_users_page.html', {
         'form': form,
         'followed_users': followed_users,
         'followers': followers,

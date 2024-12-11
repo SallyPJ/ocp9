@@ -27,7 +27,8 @@ def signup_user(request):
         request (HttpRequest): The HTTP request object.
 
     Returns:
-        HttpResponse: Renders the signup page with a form context or redirects after successful signup.
+        HttpResponse: Renders the signup page with a form context or
+        redirects after successful signup.
 
     Workflow:
         - If the request method is GET, an empty signup form is displayed.
@@ -44,4 +45,5 @@ def signup_user(request):
             user = form.save()
             login(request, user)
             return redirect(settings.LOGIN_REDIRECT_URL)
-    return render(request, 'authentication/signup_page.html', context={'form': form})
+    return render(request, 'authentication/signup_page.html',
+                  context={'form': form})

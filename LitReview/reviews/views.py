@@ -70,7 +70,7 @@ def home(request):
     context = {
         'page_obj': page_obj,
         }
-    return render(request, 'reviews/home.html', context=context)
+    return render(request, 'reviews/home_page.html', context=context)
 
 
 @login_required
@@ -126,7 +126,7 @@ def create_or_edit_ticket(request, ticket_id=None):
         'photo_form': photo_form,
         'is_edit': ticket_id is not None,
     }
-    return render(request, 'reviews/manage-ticket.html', context)
+    return render(request, 'reviews/manage_ticket.html', context)
 
 
 @login_required()
@@ -208,7 +208,7 @@ def create_or_edit_review(request, ticket_id=None, review_id=None):
         'is_reply_mode': is_reply_mode,
         'is_edit': is_edit,
     }
-    return render(request, 'reviews/manage-review.html', context)
+    return render(request, 'reviews/manage_review.html', context)
 
 
 @login_required()
@@ -246,7 +246,7 @@ def create_ticket_and_review(request):
         request (HttpRequest): The incoming HTTP request.
 
     Returns:
-        HttpResponse: Renders the 'create-ticket-and-review.html' template
+        HttpResponse: Renders the 'create_both_ticket_review.html' template
         or redirects to the home page if the form is successfully submitted.
 
     Workflow:
@@ -303,7 +303,7 @@ def create_ticket_and_review(request):
         'photo_form': photo_form,
         'review_form': review_form,
     }
-    return render(request, 'reviews/create-ticket-and-review.html', context=context)
+    return render(request, 'reviews/create_both_ticket_review.html', context=context)
 
 
 @login_required()
@@ -319,14 +319,15 @@ def display_user_posts(request):
            request (HttpRequest): The incoming HTTP request.
 
        Returns:
-           HttpResponse: Renders the 'posts.html' template with a paginated list of the user's posts.
+           HttpResponse: Renders the 'user_posts_page.html' template with
+            a paginated list of the user's posts.
 
        Workflow:
            - Retrieve all tickets created by the user.
            - Retrieve all reviews created by the user.
            - Merge the two querysets and sort by `time_created` in descending order.
            - Paginate the results (6 posts per page).
-           - Render the posts.html page with the list of posts.
+           - Render the user_posts_page.html page with the list of posts.
        """
     # Retrieve all tickets created by the user, along with their associated reviews
     user_tickets = Ticket.objects.filter(user=request.user).prefetch_related('review_set')
@@ -345,10 +346,10 @@ def display_user_posts(request):
     paginator = Paginator(posts, 6)
     page = request.GET.get('page')
     page_obj = paginator.get_page(page)
-    # Render the 'posts.html' page with the paginated list of posts
+    # Render the 'user_posts_page.html' page with the paginated list of posts
     context = {
         'page_obj': page_obj,
         'show_buttons': True,
     }
-    return render(request, 'reviews/posts.html',
+    return render(request, 'reviews/user_posts_page.html',
                   context=context)

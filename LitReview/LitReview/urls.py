@@ -34,26 +34,18 @@ urlpatterns = [
         authentication_form=CustomAuthenticationForm  # Utilisation du formulaire personnalisé
     ), name='login'),
     path('logout/', LogoutView.as_view(), name='logout'),
-    path('change-password/', PasswordChangeView.as_view(
-        template_name='authentication/password_change_form.html'),
-         name='password_change'
-     ),
-    path('change-password-done/', PasswordChangeDoneView.as_view(
-        template_name='authentication/password_change_done.html'),
-         name='password_change_done'
-         ),
     path('signup/', authentication.views.signup_user, name='signup'),
     path('home/', reviews.views.home, name='home'),
     path('reviews/create-ticket/', reviews.views.create_or_edit_ticket, name='create-ticket'),
-    path('reviews/<int:ticket_id>/edit', reviews.views.create_or_edit_ticket, name='edit_ticket'),
+    path('reviews/<int:ticket_id>/edit', reviews.views.create_or_edit_ticket, name='edit-ticket'),
     path('reviews/<int:review_id>/edit/', reviews.views.create_or_edit_review, name='edit-review'),
     path('reviews/<int:review_id>/delete/', reviews.views.delete_review, name='delete-review'),
     path('delete-ticket/<int:ticket_id>/', reviews.views.delete_ticket, name='delete-ticket'),
     path('create-review/<int:ticket_id>/', reviews.views.create_or_edit_review,
          name='create-review'),
-    path('create-ticket-and-review/', reviews.views.create_ticket_and_review,
+    path('create_both_ticket_review/', reviews.views.create_ticket_and_review,
          name='create-ticket-and-review'),
-    path('reviews/posts.html/', reviews.views.display_user_posts, name='posts'),
+    path('reviews/my-posts.html/', reviews.views.display_user_posts, name='posts'),
     path('follow-users-form/', social.views.follow_users_form, name='follow-users-form'),
 
 ]

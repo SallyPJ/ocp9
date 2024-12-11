@@ -12,16 +12,16 @@
     <p class="post-item__description">{{ review.body }}</p>
 
     <!-- Résumé du ticket lié -->
-    {% include "reviews/ticket-summary.html" with ticket=review.ticket %}
+    {% include "reviews/ticket_summary.html" with ticket=review.ticket %}
 
 
      {% if show_buttons and review.user == request.user %}
         <div class="post-item__buttons--edit">
             <!-- Bouton pour modifier -->
-            <a href="{% url 'edit-review' review.id %}" class="btn btn-primary">Modifier</a>
+            <a href="{% url 'edit-review' review.id %}" class="btn btn-primary" aria-label="Modifier la critique">Modifier</a>
 
             <!-- Bouton pour ouvrir la modale de suppression -->
-            <a href="#confirm-delete-review-{{ review.id }}" class="btn btn-danger">Supprimer</a>
+            <a href="#confirm-delete-review-{{ review.id }}" class="btn btn-danger" aria-label="Supprimer la critique">Supprimer</a>
         </div>
 
         <!-- Modale de confirmation pour supprimer la critique -->
