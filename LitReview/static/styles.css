@@ -22,6 +22,7 @@ body {
     margin-bottom: 10px;
     box-shadow: rgba(0, 0, 0, 0.35) 0px -50px 36px -28px inset;
 }
+
 .header__title {
     flex: 1;
     color: #fff;
@@ -30,25 +31,36 @@ body {
     padding: 10px;
     text-align: center;
     font-weight: bold;
+
+}
+
+.header__title h1 {
+    margin: 0;
 }
 
 .navbar__menu {
+    flex: 0;
     display: flex;
     gap: 20px;
     margin: 20px;
+    justify-content: flex-end;
+    align-items: center;
 }
 
 .navbar__item {
     display: inline;
     list-style-type: none ;
 
-
 }
+.navbar__item form{
+    margin-bottom: 0;
+}
+
 .navbar__link {
     display: block;
     font-size: 1rem;
     min-width: 60px;
-    margin: 0.5rem;               /* Marges externes (1 valeurs = 4 directions) */
+    margin: 0.5rem;
     padding: 0.4rem 0;            /* Marges internes (2 valeurs = haut/bas et gauche/droite)*/
     text-align: center;
     font-weight: bold;
@@ -57,7 +69,7 @@ body {
 }
 
 .navbar__link:hover {
-    color: #007bff; /* Couleur au survol */
+    color: #007bff;
 }
 
 .navbar__link:visited {
@@ -74,7 +86,7 @@ button.navbar__link {
 }
 
 button.navbar__link:hover {
-    color: #007bff; /* Couleur au survol pour le bouton */
+    color: #007bff;
 }
 
 .signup-block__title, .login-block__title {
@@ -90,7 +102,7 @@ button.navbar__link:hover {
     justify-content: space-between;
     font-family: 'Helvetica', 'Arial', sans-serif;
     padding: 20px;
-    gap: 20px; /* Espace entre les sections */
+    gap: 20px;
 }
 
 .signup_block, .login-block{
@@ -133,40 +145,38 @@ button.navbar__link:hover {
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
 }
 
-/* Bouton Warning */
 .btn-warning {
-    background-color: #ffc107; /* Jaune vif */
+    background-color: #ffc107;
     font-weight: bold;
     border: none;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 .btn-warning:hover {
-    background-color: #e0a800; /* Jaune foncé au survol */
-    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2); /* Accentue l'ombre au survol */
+    background-color: #e0a800;
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2);
 }
 
 .btn-warning:active {
-    background-color: #d39e00; /* Jaune encore plus foncé au clic */
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Ombre réduite lors du clic */
+    background-color: #d39e00;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-/* Bouton Danger */
 .btn-danger {
-    background-color: coral;
+    background-color: #FF474C;
     font-weight: bold;
     border: none;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 .btn-danger:hover {
-    background-color: #FF4C4C; /* Rouge plus foncé au survol */
-    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2); /* Accentue l'ombre au survol */
+    background-color: #FF4C4C;
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2);
 }
 
 .btn-danger:active {
-    background-color: #FF2E2E; /* Rouge encore plus foncé au clic */
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Ombre réduite lors du clic */
+    background-color: #FF2E2E;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .btn-create-review{
@@ -189,15 +199,15 @@ button.navbar__link:hover {
 }
 .form-control{
     font-family: 'Helvetica', 'Arial',sans-serif;
-    font-size: 1.2em; /* Agrandit le texte à l'intérieur du champ */
-    padding: 10px; /* Ajoute de l'espace autour du texte */
-    height: 50px; /* Définit une hauteur plus grande pour le champ */
-    box-sizing: border-box; /* Assure que le padding n'affecte pas la largeur totale */
+    font-size: 1.2em;
+    padding: 10px;
+    height: 50px;
+    box-sizing: border-box;
     width: 100%;
 }
 
 .form-control__larger{
-    width: 60%; /* Rend le champ plus large */
+    width: 60%;
 }
 
 .form-control__description{
@@ -205,29 +215,29 @@ button.navbar__link:hover {
 
 }
 .form-control__checkbox {
-    display: flex; /* Change la disposition en flexbox */
-    flex-direction: row; /* Aligne les éléments en ligne horizontale */
-    gap: 15px; /* Ajoute un espacement entre les options */
-    list-style: none; /* Supprime les puces par défaut */
-    padding: 0; /* Retire le padding interne */
-    margin: 0; /* Supprime la marge externe */
+    display: flex;
+    flex-direction: row;
+    gap: 15px;
+    list-style: none;
+    padding: 0;
+    margin: 0;
 }
 
-/* Style des options */
+
 .form-control__checkbox li {
-    display: inline-block; /* S'assure que chaque option reste inline */
+    display: inline-block;
 }
 
-/* Style pour l'étiquette */
+
 .form-control__checkbox label {
     display: flex;
-    align-items: center; /* Centre verticalement le texte et l'input */
-    cursor: pointer; /* Change le curseur au survol */
+    align-items: center;
+    cursor: pointer;
 }
 
-/* Ajoutez des styles pour les radio buttons */
+
 .form-control__checkbox input[type="radio"] {
-    margin-right: 5px; /* Ajoute un espace entre le bouton et le label */
+    margin-right: 5px;
 }
 .form-control__searchbar{
     width: 100%;
@@ -276,14 +286,14 @@ button.navbar__link:hover {
 .feed-container {
     display: flex;
     flex-direction: column;
-    gap: 40px; /* Espacement entre les tickets */
+    gap: 40px;
     margin: 20px ;
 }
 
 .feed-container__item {
     border: 2px solid #ddd;
-    border-radius: 8px; /* Coins arrondis */
-    padding: 20px; /* Espacement interne */
+    border-radius: 8px;
+    padding: 20px;
     background-color: #fff;
     box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px;
     display: flex;
@@ -297,9 +307,9 @@ button.navbar__link:hover {
 }
 
 .post-item__header {
-    display: flex; /* Active le mode Flexbox pour aligner les éléments horizontalement */
-    justify-content: space-between; /* Place les éléments aux extrémités (gauche et droite) */
-    align-items: center; /* Centre verticalement l'auteur et le temps */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     margin-bottom: 10px;
 }
 
@@ -330,27 +340,28 @@ button.navbar__link:hover {
 
 /* Image */
 .ticket-item__image  {
-    max-width: 400px;  /* Taille maximale réelle après redimensionnement */
-    max-height: 400px; /* Taille maximale réelle après redimensionnement */
+    max-width: 400px;
+    max-height: 400px;
     object-fit: contain;
     display: block;
 }
 .ticket-item__image-container--thumbnail{
-    width: 150px; /* Largeur fixe pour la miniature */
-    height: 150px; /* Hauteur fixe pour la miniature */
-    overflow: hidden; /* Masque les parties débordantes de l'image */
-    border-radius: 8px; /* Coins arrondis pour un rendu esthétique */
-    border: 2px solid #ddd; /* Bordure légère pour encadrer la miniature */
+    width: 150px;
+    height: 150px;
+    overflow: hidden;
+    border-radius: 8px;
+    border: 2px solid #ddd;
     display: flex;
-    justify-content: center; /* Centre horizontalement l'image */
-    align-items: center; /* Centre verticalement l'image */
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Ombre légère */
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
 .image-thumbnail {
-    max-width: 100%; /* Limite la largeur de l'image à celle de la carte */width: 100%; /* Ajuste la largeur de l'image au conteneur */
-    height: auto; /* Préserve les proportions */
-    object-fit: cover; /* Recadre l'image si nécessaire */
+    max-width: 100%;
+    width: 100%;
+    height: auto;
+    object-fit: cover;
 }
 
 .post-item__buttons--edit {
@@ -372,8 +383,8 @@ button.navbar__link:hover {
     margin: auto;
     padding : 2%;
     border: 2px solid #ddd;
-    border-radius: 8px; /* Coins arrondis */
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Ombre pour l'esthéré */
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
 .create-review-container{
@@ -382,9 +393,9 @@ button.navbar__link:hover {
 }
 
 .rating__stars {
-    font-size: 1.5rem; /* Taille des étoiles */
+    font-size: 1.5rem;
     color: black;
-    letter-spacing: 2px; /* Espacement entre les étoiles */
+    letter-spacing: 2px;
 }
 .rating__fieldset {
     margin-top: 15px;
@@ -402,9 +413,9 @@ button.navbar__link:hover {
     margin-right: 5%;
     padding : 2%;
     border: 2px solid #ddd;
-    border-radius: 8px; /* Coins arrondis */
-    background-color: #f9f9f9; /* Fond blanc */
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Ombre pour l'esthétique */
+    border-radius: 8px;
+    background-color: #f9f9f9;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
 .page-layout section{
@@ -423,21 +434,21 @@ button.navbar__link:hover {
 }
 
 .follow-user-table {
-    width: 100%; /* Utiliser toute la largeur disponible */
+    width: 100%;
     border-collapse: collapse; /* Éliminer les espaces entre les bordures */
-    margin: 20px 0; /* Ajouter de l'espace au-dessus et en dessous */
-    text-align: left; /* Alignement du texte dans les cellules */
+    margin: 20px 0;
+    text-align: left;
     font-size: 1.2em;
 }
 
 .follow-user-table tr{
-    border: 1px solid #cccc; /* Ajoute une bordure légère */
-    padding: 8px; /* Ajoute un peu d'espace autour du contenu */
+    border: 1px solid #cccc;
+    padding: 8px;
 }
 
 .follow-user-table td{
-   display: flex; /* Active le mode flexbox */
-   justify-content: space-between; /* Éloigne les deux éléments (texte à gauche, bouton à droite) */
+   display: flex;
+   justify-content: space-between;
    align-items: center;
    padding: 8px;
 }
@@ -456,7 +467,7 @@ button.navbar__link:hover {
     justify-content: space-between;
 }
 
-/* Modale cachée par défaut */
+/* Modal hidden by default */
 .modal {
     display: none;
     position: fixed;
@@ -468,14 +479,13 @@ button.navbar__link:hover {
     z-index: 1000;
 }
 
-/* Affiche la modale lorsqu’elle est ciblée */
+/* Display modal when targeted */
 .modal:target {
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
-/* Contenu de la modale */
 .modal-content {
     background-color: #fff;
     padding: 20px;
@@ -494,10 +504,6 @@ button.navbar__link:hover {
     gap: 10px;
     font-size: 1.2em;
     font-family: 'Helvetica','Arial' sans-serif;
-}
-
-.errorlist{
-
 }
 
 .alert-success {
@@ -531,29 +537,60 @@ button.navbar__link:hover {
     border-radius: 5px;
 }
 
-@media (max-width: 768px) {
-    .feed-main-content {
+@media (max-width: 425px) {
+     .feed-main-content {
         padding-left : 2%;
         padding-right : 2%;
         margin-top : 2%;
-}
+    }
 
     .header {
-        flex-direction: column; /* Passe en colonne */
-        align-items: center; /* Centre les éléments */
+        flex-direction: column;
+        align-items: center;
+        margin-left: 10%;
+        margin-right: 10%;
     }
 
     .header__title {
-        font-size: 1.5rem; /* Réduit la taille du titre */
-        margin-bottom: 1rem; /* Ajoute un espace sous le titre */
+        font-size: 1.5rem;
+        margin-bottom: 1rem;
         text-align: center;
     }
 
     .navbar__menu {
-        flex-direction: column; /* Passe les liens en colonne */
-        align-items: center; /* Centre les liens */
+        flex-direction: column;
+        align-items: center;
         margin:0;
         padding:0;
     }
 }
+@media (min-width: 426px) and (max-width: 768px) {
+    .feed-main-content {
+        padding-left : 2%;
+        padding-right : 2%;
+        margin-top : 2%;
+    }
+
+    .header {
+        flex-direction: column;
+        align-items: center;
+        margin-left: 20%;
+        margin-right: 20%;
+    }
+
+    .header__title {
+        font-size: 1.5rem;
+        margin-bottom: 1rem;
+        text-align: center;
+    }
+
+    .navbar__menu {
+        flex-direction: column;
+        align-items: center;
+        margin:0;
+        padding:0;
+    }
 }
+
+
+
