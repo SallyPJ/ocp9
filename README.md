@@ -13,7 +13,7 @@ It also supports social features such as following other users and interacting w
 ```
    
 ## Installation
-- Open the project folder
+- Open the main folder
 ```bash
 cd ocp9
 ```
@@ -75,7 +75,7 @@ Use these credentials to explore the app:
 |------------|-----------|----------------------------------------------------------|
 | test_user1 | ocp9user1 | Regular user, follows test_user2 and test_user3          |
 | test_user2 | ocp9user2 | Regular user, follows test_user1, has blocked test_user3 |
-| test_user2 | ocp9user3 | Regular user, follows test_user1 and test_user2          |
+| test_user3 | ocp9user3 | Regular user, follows test_user1 and test_user2          |
 | admin      | admin     | Admin account with full permissions, follows test_user1  |
 ### How to Access
 
